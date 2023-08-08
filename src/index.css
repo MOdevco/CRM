@@ -1,0 +1,11 @@
+
+
+*::-webkit-scrollbar {
+  width: 0;
+}
+
+.inp::placeholder {
+  color: #CACEDC !important;
+}
+
+
