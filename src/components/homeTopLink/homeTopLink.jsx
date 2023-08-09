@@ -5,7 +5,7 @@ import { AiOutlineRight } from 'react-icons/ai'
 
 const HomeTopLink = () => {
   return (
-    <Box display={'flex'} gap={'20px'}>
+    <Box display={'flex'} gap={'20px'} className='link'>
         <NavLink>
             <Text display={'flex'} alignItems={'center'} gap={'10px'} _hover={{color: '#5D5FEF'}}>
                 Home

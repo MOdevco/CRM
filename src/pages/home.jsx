@@ -1,12 +1,8 @@
 import { Box, Divider, Flex } from "@chakra-ui/react";
 import React from "react";
 import HomeBody from "../components/homeBody/homeBody";
-import HomeLinkKategori from "../components/homeLinkKategori/homeLinkKategori";
 import HomeTitle from "../components/homeTitle/homeTitle";
 import HomeTopLink from "../components/homeTopLink/homeTopLink";
-import Navbar from "../components/navbar/navbar";
-import Sidebar from "../components/sidebar/sidebar";
-import Fanlar from "./Fanlar";
 
 const Home = () => {
   return (

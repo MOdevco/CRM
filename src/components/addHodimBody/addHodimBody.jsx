@@ -28,14 +28,14 @@ const AddHodimBody = () => {
   return (
     <Box width={'100%'} p={'30px'}   bg={'white'} rounded={'10px'}>
 
-        <Box display={'flex'} flexDirection={{base: 'column' , xl: 'row'}} justifyContent={'space-evenly'}>
+        <Box display={'flex'} flexDirection={{base: 'column' , xl: 'column', '2xl': 'row'}} justifyContent={'space-evenly'}>
             <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
 
                 {/* ism familiya boshlandi */}
                 <Box display={'flex'} flexDirection={{base: 'column' , xl: 'row'}} gap={'30px'}>
                     <FormControl isRequired>
                         <FormLabel>Ismi</FormLabel>
-                        <Input width={{base: '100%' , xl: '500px'}} placeholder='Ism...' />
+                        <Input width={{base: '100%' , xl:'425px', '2xl': '500px'}} placeholder='Ism...' />
                     </FormControl>
 
                     <FormControl isRequired>
@@ -111,7 +111,7 @@ const AddHodimBody = () => {
                 <Box display={'flex'} flexDirection={{base: 'column' , xl: 'row'}} gap={'30px'}>
                     <FormControl isRequired>
                         <FormLabel>Instagram (username)</FormLabel>
-                        <Input width={{base: '100%' , xl: '50%'}} placeholder='Instagram...' />
+                        <Input width={{base: '100%' ,  xl: '48.5%', '2xl': '50%'}} placeholder='Instagram...' />
                     </FormControl>
                 </Box>
 
@@ -137,7 +137,7 @@ const AddHodimBody = () => {
             </Box>
 
             <Box mt={'20px'} >
-                <Box  width={{base: '100%' , xl: '400px'}} overflow={'auto'} display={'flex'} alignItems={'center'} justifyContent={'center'} rounded={'10px'} height={'300px'} bg={'#F0F0FF'}>
+                <Box  width={{base: '100%' , '2xl': '400px'}} overflow={'auto'} display={'flex'} alignItems={'center'} justifyContent={'center'} rounded={'10px'} height={'300px'} bg={'#F0F0FF'}>
                     <form action="" >
                         <input  className='input-field'  hidden type="file" accept='image/*' onChange={({target: {files}}) => {
                         files[0] && setFileName(files[0].name)

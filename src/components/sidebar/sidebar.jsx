@@ -8,7 +8,7 @@ import SidebarSetingis from '../sidebarSetings/sidebarSetingis'
 
 const Sidebar = () => {
   return (
-    <Box position={'fixed'} display={{base: 'none' , xl: 'block'}} zIndex={2} width={'300px'} px={'40px'} height={'100vh'} borderRight={'2px'} borderColor={'gray.300'} bg={'white'} >
+    <Box position={'fixed'} display={{base: 'none' , xl: 'block'}} zIndex={'111'} width={'300px'} px={'40px'} height={'100vh'} borderRight={'2px'} borderColor={'gray.300'} bg={'white'} >
         <Box display={'flex'} flexDirection={'column'} alignItems={'flex-start'} py={'30px'}>
             <Box  className='logo'_hover={{transform: 'rotate(5deg)' , transition: '0.5s'}}>
                 <NavLink to={'/'}>
