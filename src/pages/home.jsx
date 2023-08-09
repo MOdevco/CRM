@@ -6,33 +6,31 @@ import HomeTitle from "../components/homeTitle/homeTitle";
 import HomeTopLink from "../components/homeTopLink/homeTopLink";
 import Navbar from "../components/navbar/navbar";
 import Sidebar from "../components/sidebar/sidebar";
+import Fanlar from "./Fanlar";
 
 const Home = () => {
   return (
-    <Box width={'100%'} minHeight={'100vh'}>
-        
-        <Flex>
-            
+    <Box width={"100%"} minHeight={"100vh"}>
+      <Flex>
+        <Box
+          pt={"100px"}
+          width={"100%"}
+          px={"20px"}
+          display={"flex"}
+          flexDirection={"column"}
+          gap={"15px"}
+          pl={{ base: "10", xl: "320px" }}
+        >
+          <HomeTopLink />
+              
+          <HomeTitle />
 
+          {/* <HomeLinkKategori /> */}
+          {/* <Divider height={'1px'} bg={'#EDEDED'} /> */}
 
-            
-
-
-            <Box pt={'100px'} width={'100%'} px={'20px'} display={'flex'} flexDirection={'column'} gap={'15px'} pl={{base: '10' , xl: '320px'}}>
-                <HomeTopLink />
-
-                <HomeTitle />
-
-                {/* <HomeLinkKategori /> */}
-                {/* <Divider height={'1px'} bg={'#EDEDED'} /> */}
-
-                <HomeBody />
-            </Box>
-        </Flex>
-
-
-
-        
+          <HomeBody />
+        </Box>
+      </Flex>
     </Box>
   );
 };
