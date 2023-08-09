@@ -11,6 +11,7 @@ import { FiMessageCircle } from 'react-icons/fi'
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import { LiaWalletSolid } from 'react-icons/lia'
 import { GoTasklist } from 'react-icons/go'
+import { NavLink } from 'react-router-dom'
 const SidebarResurslar = () => {
   return (
     <Box pt={'50px'} >
@@ -42,12 +43,13 @@ const SidebarResurslar = () => {
             </Accordion>
 
             <Box display={'flex'} alignItems="center" justifyContent={'space-between'}> 
-                <Button fontSize={'18px'} fontWeight={'500'} display={'flex'} alignItems={'center'} bg={'transparent'}  gap={'15px'}  _hover={{bg: 'transparent'}}>
-                    <FiMessageCircle fontSize={'25px'}  />
-                    <Text fontSize={'15px'}>Inventorlar</Text>
-                    
-                </Button>
-
+                <NavLink to={'/chat'}>
+                    <Button fontSize={'18px'} fontWeight={'500'} display={'flex'} alignItems={'center'} bg={'transparent'}  gap={'15px'}  _hover={{bg: 'transparent'}}>
+                        <FiMessageCircle fontSize={'25px'}  />
+                        <Text fontSize={'15px'}>Inventorlar</Text>
+                        
+                    </Button>
+                </NavLink>
                 <Box>
                     <Text bg={'#7364FF'} fontSize={'15px'}  rounded={'20px'} color={'white'} width={'49px'} cursor={'pointer'} height={'23px'} textAlign={'center'} >+16</Text>
                 </Box>
