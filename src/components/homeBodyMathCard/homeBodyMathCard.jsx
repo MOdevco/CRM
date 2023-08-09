@@ -28,9 +28,9 @@ const HomeBodyMathCard = ({title , paragraph , prosent, theme1 , colorSis , them
 
 
   return (
-    <Box >
+    <Box>
 
-        <Box width={{base: '100%' , xl: '350px'}} p={'20px'}  display={'flex'} flexDirection={'column'} gap={'20px'} bg={'white'} boxShadow={'1px 5px 7px -8px #40444D'} rounded={'8px'}>
+        <Box width={{base: '100%' , xl: '350px',}} p={'20px'}  display={'flex'} flexDirection={'column'} gap={'20px'} bg={'white'} boxShadow={'1px 5px 7px -8px #40444D'} rounded={'8px'}>
             <Box color={'#40444D'} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
                 <Heading fontSize={'18px'}>{title}</Heading>
                 <Menu >
