@@ -38,8 +38,10 @@ function App() {
       </Box>}
 
       <Box>
-          <Navbar />
-        </Box>
+        <Navbar />
+      </Box>
+
+      hii
 
 
       <Flex>
