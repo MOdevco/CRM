@@ -48,7 +48,7 @@ const HodimlarTitle = () => {
                         </Box>
                     </Box>
                     
-                    <Box  position={'relative'} zIndex={'1000'}>
+                    <Box  position={'relative'} zIndex={'10'}>
                         {sizes.map((size) => (
                             <Button  onClick={() => handleSizeClick(size)}key={size}my={7} bg={'#7364FF'} _hover={{bg: '#5364FF'}} height={'42px'} color={'white'} display={'flex'} gap={'10px'}>
                                 <AddIcon />

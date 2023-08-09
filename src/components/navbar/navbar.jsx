@@ -17,7 +17,7 @@ import { PiHandDuotone }from 'react-icons/pi'
 import { BsExclamationCircle } from 'react-icons/bs'
 const Navbar = () => {
   return (
-    <Box width={"100%"} borderBottom={"2px"} borderColor={"gray.300"} position={"fixed"} right={"0"} height={"9vh"} bg={"white"} px={{base: '0' , xl: '30px'}}zIndex={'1'}>       <Box display={"flex"}alignItems={"center"}px={"30px"}justifyContent={"space-between"}pl={{base: '10' , xl: '295px'}}minHeight={"9vh"}>
+    <Box width={"100%"} borderBottom={"2px"} borderColor={"gray.300"} position={"fixed"} right={"0"} height={"9vh"} bg={"white"} px={{base: '0' , xl: '30px'}}zIndex={'110'}>       <Box display={"flex"}alignItems={"center"}px={"30px"}justifyContent={"space-between"}pl={{base: '10' , xl: '295px'}}minHeight={"9vh"}>
       <Box display={"flex"}bg={"#F5F5FA"}width={"30%"}height={"45px"}rounded={"8px"}px={"10px"}alignItems={"center"}justifyContent={"center"}>
          <FiSearch />
           <input placeholder="Search..."style={{height: "30px",width: "100%", border: "none", outline: "none", paddingLeft: "10px", background: "transparent", }}type="text"/>
@@ -69,7 +69,7 @@ const Navbar = () => {
           </Box>
 
 
-          <Box display={"flex"} alignItems={"center"} gap={"12px"}>
+          <Box display={"flex"}  alignItems={"center"} gap={"12px"}>
             <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
             <Menu>
               <MenuButton  fontSize={"18px"} fontWeight={"500"}>
@@ -82,8 +82,8 @@ const Navbar = () => {
                 <MenuItem>Download</MenuItem>
                 <MenuItem>Create a Copy</MenuItem>
                 <MenuItem>Mark as Draft</MenuItem>
-                <MenuItem>Delete avatar</MenuItem>
-                <MenuItem>Attend a Workshop</MenuItem>
+                <MenuItem>Mark as Draft</MenuItem>
+                <MenuItem>Mark as Draft</MenuItem>
               </MenuList>
             </Menu>
           </Box>

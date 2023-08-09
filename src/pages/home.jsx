@@ -4,8 +4,6 @@ import HomeBody from "../components/homeBody/homeBody";
 import HomeLinkKategori from "../components/homeLinkKategori/homeLinkKategori";
 import HomeTitle from "../components/homeTitle/homeTitle";
 import HomeTopLink from "../components/homeTopLink/homeTopLink";
-import Navbar from "../components/navbar/navbar";
-import Sidebar from "../components/sidebar/sidebar";
 
 const Home = () => {
   return (

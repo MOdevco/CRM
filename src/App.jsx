@@ -4,6 +4,7 @@ import { GoMoveToTop } from "react-icons/go";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/navbar";
 import Sidebar from "./components/sidebar/sidebar";
+import Chat from "./pages/chat";
 import Hodimlar from "./pages/hodimlar";
 import Home from "./pages/home";
 import Login from "./pages/login";
@@ -54,6 +55,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/hodimlar" element={<Hodimlar />}></Route>
           <Route path="/yangiHodim" element={<YangiHodim />}></Route>
+          <Route path="/chat" element={<Chat />}></Route>
           <Route path="/login" element={<Login />}></Route>
         </Routes>
       </Flex>
