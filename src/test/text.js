@@ -207,3 +207,79 @@ export const admin = [
 
     }
 ]
+
+
+
+export const yonalish = [
+    {
+        yonalish: 'Web Frontend',
+        job: 'Dasturlash',
+        p: 'Sales ang marketing are two business....',
+        soni: 'O’qituvchilar soni: 20'
+    },
+    {
+        yonalish: 'Web Frontend',
+        job: 'Dasturlash',
+        p: 'Sales ang marketing are two business....',
+        soni: 'O’qituvchilar soni: 20'
+    },
+    {
+        yonalish: 'Web Frontend',
+        job: 'Dasturlash',
+        p: 'Sales ang marketing are two business....',
+        soni: 'O’qituvchilar soni: 20'
+    },
+    {
+        yonalish: 'Web Frontend',
+        job: 'Dasturlash',
+        p: 'Sales ang marketing are two business....',
+        soni: 'O’qituvchilar soni: 20'
+    },
+    {
+        yonalish: 'Web Frontend',
+        job: 'Dasturlash',
+        p: 'Sales ang marketing are two business....',
+        soni: 'O’qituvchilar soni: 20'
+    },
+    {
+        yonalish: 'Web Frontend',
+        job: 'Dasturlash',
+        p: 'Sales ang marketing are two business....',
+        soni: 'O’qituvchilar soni: 20'
+    },
+    {
+        yonalish: 'Web Frontend',
+        job: 'Dasturlash',
+        p: 'Sales ang marketing are two business....',
+        soni: 'O’qituvchilar soni: 20'
+    }
+]
+
+
+export const oqituvchi = [
+    {
+        name: 'Tursunali Xorunaliyev',
+        daraja: 'Oliy ma’lumotli',
+        number: '+998 (99) 123-45-67'
+    },
+    {
+        name: 'Tursunali Xorunaliyev',
+        daraja: 'Oliy ma’lumotli',
+        number: '+998 (99) 123-45-67'
+    },
+    {
+        name: 'Tursunali Xorunaliyev',
+        daraja: 'Oliy ma’lumotli',
+        number: '+998 (99) 123-45-67'
+    },
+    {
+        name: 'Tursunali Xorunaliyev',
+        daraja: 'Oliy ma’lumotli',
+        number: '+998 (99) 123-45-67'
+    },
+    {
+        name: 'Tursunali Xorunaliyev',
+        daraja: 'Oliy ma’lumotli',
+        number: '+998 (99) 123-45-67'
+    }
+]
