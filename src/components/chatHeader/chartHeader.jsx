@@ -2,7 +2,6 @@ import { SearchIcon } from '@chakra-ui/icons'
 import { Avatar, Box, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
 import ChatSideBar from '../chatSideBar/chatSideBar'
-import ChatMessage from '../chatMessage/chatMessage'
 
 const ChartHeader = () => {
   return (
@@ -31,9 +30,6 @@ const ChartHeader = () => {
         <Box display={'flex'}>
             <Box  borderRight={'2px'} borderColor={'#E2E8F0'}  width={'450px'} position={'fixed'} p={'30px'} height={'77vh'} bg={'white'} >
                 <ChatSideBar />
-            </Box>
-            <Box pl={'450px'}>
-                <ChatMessage />
             </Box>
 
 
