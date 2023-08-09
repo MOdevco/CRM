@@ -69,11 +69,7 @@ const Navbar = () => {
           </Box>
 
 
-<<<<<<< HEAD
-          <Box display={"flex"}  alignItems={"center"} gap={"12px"}>
-=======
           <Box  display={"flex"} alignItems={"center"} gap={"12px"}>
->>>>>>> 093a00fea9557566f3dcac9511c9baabbddeba61
             <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
             <Menu >
               <MenuButton fontSize={"18px"} fontWeight={"500"}>
