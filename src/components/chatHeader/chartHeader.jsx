@@ -32,7 +32,6 @@ const ChartHeader = () => {
             <Box  borderRight={'2px'} borderColor={'#E2E8F0'}  width={'450px'} position={'fixed'} p={'30px'} height={'77vh'} bg={'white'} >
                 <ChatSideBar />
             </Box>
-            
 
         </Box>
 

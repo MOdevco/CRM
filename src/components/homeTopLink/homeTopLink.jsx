@@ -12,9 +12,10 @@ const HomeTopLink = () => {
                 <AiOutlineRight />
             </Text>
         </NavLink>
-        <NavLink>
+        <NavLink to={"/Fanlar"}>
             <Text display={'flex'} alignItems={'center'} gap={'10px'} _hover={{color: '#5D5FEF'}}>
                 Fan va yo’nalishlar
+                <AiOutlineRight />
             </Text>
         </NavLink>
     </Box>
