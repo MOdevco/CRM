@@ -48,7 +48,7 @@ const Login = () => {
       position={'fixed'}
       top={0}
       left={0}
-      zIndex={10}
+      zIndex={1000}
     >
       <Box
         display={"flex"}

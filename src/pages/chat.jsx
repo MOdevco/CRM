@@ -10,9 +10,6 @@ const Chat = () => {
             <Box pt={'100px'} width={'100%'} px={'20px'} display={'flex'} flexDirection={'column'} gap={'15px'} pl={{base: '10' , xl: '320px'}}>
                 <ChartHeader />
 
-
-
-
             </Box>
         </Flex>
     </Box>

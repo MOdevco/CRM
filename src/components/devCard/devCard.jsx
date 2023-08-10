@@ -19,7 +19,7 @@ import {
   } from '@chakra-ui/react'
 const DevCard = ({title , paragraph , img , theme1 , theme2 , date , viwe , mess , likes}) => {
   return (
-    <Box minHeight={''}>
+    <Box >
 
         <Box width={{base: '100%' , xl: '350px'}} p={'15px'}  display={'flex'} flexDirection={'column'} gap={'20px'} bg={'white'} boxShadow={'1px 5px 7px -8px #40444D'} rounded={'8px'}>
             <Box color={'#40444D'} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
@@ -45,7 +45,7 @@ const DevCard = ({title , paragraph , img , theme1 , theme2 , date , viwe , mess
             </Box>
 
             <Box>
-                <Image width={'100%'} src={img}></Image>
+                <Image width={'300px'} height={'200px'} src={img}></Image>
             </Box>
 
             <Box display={'flex'} alignItems={'center'}  justifyContent={'space-between'}>
