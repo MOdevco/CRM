@@ -23,7 +23,7 @@ import {
     Button
   } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
-const HomeBodyMathCard = ({title , paragraph , prosent, theme1 , colorSis , theme2 , date , viwe , mess , likes}) => {
+const HomeBodyGeogCard = ({title , paragraph , prosent, theme1 , colorSis , theme2 , date , viwe , mess , likes}) => {
 
 
 
@@ -102,4 +102,4 @@ const HomeBodyMathCard = ({title , paragraph , prosent, theme1 , colorSis , them
   )
 }
 
-export default HomeBodyMathCard
+export default HomeBodyGeogCard

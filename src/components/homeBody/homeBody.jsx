@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 // import HomeBodyEn from '../homeBodyEn/homeBodyEn'
 // import HomeBodyKomp from '../homeBodyKop/homeBodyKomp'
-import HomeBodyMath from '../homeBodyMath/homeBodyMath'
 import HomeBodyAll from '../homeBodyAll/homeBodyAll'
 import axios from 'axios'
 import { API } from '../../api/api'
 import HomeBodyTarix from '../homeBodyTarix/homeBodyTarix'
+import HomeBodyGeog from '../homeBodyGeog/homeBodyGeog'
 const HomeBody = () => {
 
     const [data , setData] = useState([])
@@ -44,7 +44,7 @@ const HomeBody = () => {
                     <HomeBodyTarix />
                 </TabPanel>
                 <TabPanel>
-                    <HomeBodyMath />
+                    <HomeBodyGeog />
                 </TabPanel>
                 <TabPanel>
                     {/* <HomeBodyEn /> */}

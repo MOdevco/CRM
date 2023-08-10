@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { API } from '../../api/api'
 import { kompani, lapto, mobile } from '../../assets'
 import DevCard from '../devCard/devCard'
-import HomeBodyMathCard from '../homeBodyMathCard/homeBodyMathCard'
+import HomeBodyMathCard from '../homeBodyGeogCard/homeBodyGeogCard'
 
 const HomeBodyAll = () => {
     const [data , setData] = useState([])
