@@ -5,7 +5,23 @@ import { API } from '../../api/api'
 import {  lapto, mobile } from '../../assets'
 import DevCard from '../devCard/devCard'
 
-const HomeBodyDev = () => {
+const HomeBodyTarix = () => {
+  const [data , setData] = useState([])
+
+  useEffect(() => {
+    const formData = new FormData()
+    formData.append('sid' , 10)
+
+    axios.get(`${API}api/org/ss/ss-by-org` , {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+
+
+    
+
+  } , [])
 
   
 
@@ -16,11 +32,10 @@ const HomeBodyDev = () => {
         <DevCard title={'Web (frontend)'} paragraph={'Sales ang marketing are two business functions within an organization. Sales ang marketing are two business functions within an organization.'} img={lapto} theme1={'Marketing'} theme2={'Sales'} date={'25 Sep, 2022'} viwe={'04'} mess={'08'} likes={'24'}/>
 
 
-        <DevCard title={'Mobile (Android & iOS)'} paragraph={'#5678904'} img={mobile} theme1={'Sprint'} theme2={'Design'} date={'25 Sep, 2022'} viwe={'04'} mess={'07'} likes={'22'}/>
 
         
     </Box>
   )
 }
 
-export default HomeBodyDev
+export default HomeBodyTarix

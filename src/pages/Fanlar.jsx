@@ -3,7 +3,6 @@ import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import FanTopLink from "../components/fanTopLink/fanTopLink";
 import FanlarTitle from "../components/fanlarTitle/fanlarTitle";
-import FanlarBody from "../components/fanlarBody/fanlarBody";
 const Fanlar = () => {
   return (
     <div>

@@ -43,27 +43,17 @@ const SidebarResurslar = () => {
             </Accordion>
 
             <NavLink to={'/chat'}>
-                <Accordion allowToggle>
-                    <AccordionItem  border={'none'} >
-                        <AccordionButton _expanded={{ bg: '#7364FF', color: 'white' }} _hover={{bg: ''}} rounded={'20px'}  >
-                            <Box _expanded={{ bg: '#7364FF', color: 'white' }} as="span" flex='1' gap={'15px'} display={'flex'} alignItems={'center'}  textAlign='left'>
-                                <FiMessageCircle fontSize={'25px'}  />
-                                
-                                <Text fontSize={'15px'} fontWeight={'500'}>Inventorlar</Text>
-                                <Text bg={'#7364FF'} fontSize={'15px'}  rounded={'20px'} color={'white'} width={'49px'} cursor={'pointer'} height={'23px'} textAlign={'center'} >+16</Text>
-                            </Box>
-                        </AccordionButton>
-                    </AccordionItem>
-                </Accordion>
-            </NavLink>
-
-            <NavLink to={'/chat'} style={({isActive}) => {return{color: isActive ? 'white' : ''}}} >
+                <Box display={'flex'} alignItems="center" justifyContent={'space-between'}> 
+                    <Button fontSize={'18px'} fontWeight={'500'} display={'flex'} alignItems={'center'} bg={'transparent'}  gap={'15px'}  _hover={{bg: 'transparent'}}>
                         <FiMessageCircle fontSize={'25px'}  />
-
-                        <Text fontSize={'15px'}></Text>
-                       
+                        <Text fontSize={'15px'}>Inventorlar</Text>
+                        
+                    </Button>
+                    <Box>
+                        <Text bg={'#7364FF'} fontSize={'15px'}  rounded={'20px'} color={'white'} width={'49px'} cursor={'pointer'} height={'23px'} textAlign={'center'} >+16</Text>
+                    </Box>
+                </Box>
             </NavLink>
-
             <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
                 <Button fontSize={'18px'} fontWeight={'500'} display={'flex'} alignItems={'center'} bg={'transparent'}  gap={'15px'} _hover={{bg: 'transparent'}}>
                     <FaRegCalendarAlt fontSize={'25px'}  />

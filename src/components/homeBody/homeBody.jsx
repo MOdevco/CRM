@@ -1,13 +1,13 @@
 import { Box } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import HomeBodyDev from '../homeBodyDev/homeBodyDev'
-import HomeBodyEn from '../homeBodyEn/homeBodyEn'
-import HomeBodyKomp from '../homeBodyKop/homeBodyKomp'
+// import HomeBodyEn from '../homeBodyEn/homeBodyEn'
+// import HomeBodyKomp from '../homeBodyKop/homeBodyKomp'
 import HomeBodyMath from '../homeBodyMath/homeBodyMath'
 import HomeBodyAll from '../homeBodyAll/homeBodyAll'
 import axios from 'axios'
 import { API } from '../../api/api'
+import HomeBodyTarix from '../homeBodyTarix/homeBodyTarix'
 const HomeBody = () => {
 
     const [data , setData] = useState([])
@@ -41,7 +41,7 @@ const HomeBody = () => {
                     <HomeBodyAll />
                 </TabPanel>
                 <TabPanel>
-                    <HomeBodyDev />
+                    <HomeBodyTarix />
                 </TabPanel>
                 <TabPanel>
                     <HomeBodyMath />
