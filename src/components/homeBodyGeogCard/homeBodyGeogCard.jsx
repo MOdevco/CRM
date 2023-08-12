@@ -23,8 +23,11 @@ import {
     Button
   } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
+import axios from 'axios'
+import { API } from '../../api/api'
 const HomeBodyGeogCard = ({title , paragraph , prosent, theme1 , colorSis , theme2 , date , viwe , mess , likes}) => {
 
+   
 
 
   return (

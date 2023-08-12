@@ -13,6 +13,8 @@ const HomeBodyTarix = () => {
     axios.get(`${API}api/org/ss/ss-by-org?sid=10` , {
     
       headers: {
+        "ngrok-skip-browser-warning": true,
+        "Access-Control-Allow-Origin": "*",
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     }).then((res) => {

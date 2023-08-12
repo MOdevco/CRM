@@ -17,7 +17,8 @@ import {
     MenuDivider,
     Button
   } from '@chakra-ui/react'
-const DevCard = ({title , paragraph , img , theme1 , theme2 , date , viwe , mess , likes}) => {
+const DevCard = ({title , paragraph , img , theme1 , theme2 , date , viwe , mess , likes , handleDelete , delItem}) => {
+    
   return (
     <Box >
 
@@ -32,7 +33,7 @@ const DevCard = ({title , paragraph , img , theme1 , theme2 , date , viwe , mess
                             <MdOutlineMoreHoriz cursor={'pointer'} fontSize={'40px'} />
                         </MenuButton>
                         <MenuList p={'10px'} display={'flex'} justifyContent={'space-evenly'} >
-                            <Button bg={'red'} _hover={{bg: 'red.300'}}><AiFillDelete color='white' fontSize={'25px'} /></Button>
+                            <Button onClick={() => handleDelete(delItem)} bg={'red'} _hover={{bg: 'red.300'}}><AiFillDelete color='white' fontSize={'25px'} /></Button>
                             <Button bg={'green.200'}><EditIcon color={'white'} /></Button>
                         </MenuList>
                         </>

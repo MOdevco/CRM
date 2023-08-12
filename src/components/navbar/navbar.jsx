@@ -8,13 +8,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { FiSearch } from "react-icons/fi";
-import { AiOutlineDown , AiOutlineCheck} from "react-icons/ai";
+import { FiSearch , FiSettings} from "react-icons/fi";
+import { AiOutlineDown , AiOutlineCheck , AiOutlineUser , AiFillSetting} from "react-icons/ai";
 import { BiBell } from "react-icons/bi";
 import { Avatar } from "@chakra-ui/react";
 import { TiUpload } from 'react-icons/ti'
 import { PiHandDuotone }from 'react-icons/pi'
 import { BsExclamationCircle } from 'react-icons/bs'
+import { CiLock } from 'react-icons/ci'
+import { GoSignOut } from 'react-icons/go'
 const Navbar = () => {
   return (
     <Box width={"100%"} borderBottom={"2px"} borderColor={"gray.300"} position={"fixed"} right={"0"} height={"9vh"} bg={"white"} px={{base: '0' , xl: '30px'}}zIndex={'110'}>       <Box display={"flex"}alignItems={"center"}px={"30px"}justifyContent={"space-between"}pl={{base: '10' , xl: '295px'}}minHeight={"9vh"}>
@@ -79,11 +81,10 @@ const Navbar = () => {
                 </Box>
               </MenuButton>
               <MenuList>
-                <MenuItem>Download</MenuItem>
-                <MenuItem>Create a Copy</MenuItem>
-                <MenuItem>Mark as Draft</MenuItem>
-                <MenuItem>Mark as Draft</MenuItem>
-                <MenuItem>Mark as Draft</MenuItem>
+                <MenuItem display={'flex'} gap={'5px'}><AiOutlineUser fontSize={'20px'} /> Profil </MenuItem>
+                <MenuItem display={'flex'} gap={'5px'}><FiSettings  fontSize={'20px'} /> Sozlamalar</MenuItem>
+                <MenuItem display={'flex'} gap={'5px'}><CiLock  fontSize={'20px'} />Private</MenuItem>
+                <MenuItem display={'flex'} gap={'5px'}><GoSignOut fontSize={'20px'} /> Profildan chqish</MenuItem>
               </MenuList>
             </Menu>
           </Box>

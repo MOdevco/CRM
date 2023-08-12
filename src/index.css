@@ -8,6 +8,11 @@
   color: #CACEDC !important;
 }
 
+.vald {
+  border: 1px solid red !important;
+  filter: drop-shadow(5px 5px 5px red) !important;
+}
+
 
 @media(max-width: 820px){
   .math{

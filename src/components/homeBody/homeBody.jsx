@@ -5,9 +5,9 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 // import HomeBodyKomp from '../homeBodyKop/homeBodyKomp'
 import HomeBodyAll from '../homeBodyAll/homeBodyAll'
 import axios from 'axios'
-import { API } from '../../api/api'
 import HomeBodyTarix from '../homeBodyTarix/homeBodyTarix'
 import HomeBodyGeog from '../homeBodyGeog/homeBodyGeog'
+import { API } from '../../api/api'
 const HomeBody = () => {
 
     const [data , setData] = useState([])
@@ -15,6 +15,8 @@ const HomeBody = () => {
     useEffect(() => {
         axios.get(`${API}api/org/ss/org-subjects` , {
             headers: {
+                "ngrok-skip-browser-warning": true,
+                "Access-Control-Allow-Origin": "*",
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         }).then((res) => {
@@ -30,7 +32,7 @@ const HomeBody = () => {
             <TabList  border={'none'}>
                 <Tab>Barchasi</Tab>
                 {data.map((dars , i) => (
-                    <Box>
+                    <Box key={i}>
                         <Tab>{dars.name}</Tab>
                     </Box>
                 ))}
