@@ -46,7 +46,7 @@ const DevCard = ({title , paragraph , img , theme1 , theme2 , date , viwe , mess
             </Box>
 
             <Box>
-                <Image width={'300px'} height={'200px'} src={img}></Image>
+                <Image width={'300px'} height={'200px'} src={`data:image/png;base64,${img}`}></Image>
             </Box>
 
             <Box display={'flex'} alignItems={'center'}  justifyContent={'space-between'}>
