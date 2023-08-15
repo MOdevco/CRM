@@ -1,6 +1,6 @@
 import { Box, Divider, Heading, Image, Text, WrapItem } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdOutlineMoreHoriz } from 'react-icons/md'
 import { lapto } from '../../assets'
 import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
@@ -17,7 +17,22 @@ import {
     MenuDivider,
     Button
   } from '@chakra-ui/react'
+import axios from 'axios'
+import { API } from '../../api/api'
 const DevCard = ({title , paragraph , img , theme1 , theme2 , date , viwe , mess , likes , handleDelete , delItem}) => {
+
+    const [dataImg , setDataImg] = useState('')
+
+    useEffect(() => {
+        axios.get(`${API}api/image/get?id=${img}` , {
+          headers: {
+            "ngrok-skip-browser-warning": true,
+            "Access-Control-Allow-Origin": "*",
+          }
+        }).then((res) => {
+          setDataImg(res.data)
+        })
+      } , [])
     
   return (
     <Box >
@@ -46,7 +61,7 @@ const DevCard = ({title , paragraph , img , theme1 , theme2 , date , viwe , mess
             </Box>
 
             <Box>
-                <Image width={'300px'} height={'200px'} src={`data:image/png;base64,${img}`}></Image>
+                <Image width={'300px'} height={'200px'} src={`data:image/png;base64,${dataImg}`}></Image>
             </Box>
 
             <Box display={'flex'} alignItems={'center'}  justifyContent={'space-between'}>

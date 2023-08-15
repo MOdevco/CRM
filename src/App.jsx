@@ -10,7 +10,6 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import YangiHodim from "./pages/yangiHodim";
 import Fanlar from "./pages/Fanlar";
-import Res from "./components/res/res";
 
 function App() {
   const [scroll, setScroll] = useState(false);
@@ -61,7 +60,6 @@ function App() {
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/Fanlar" element={<Fanlar />}></Route>
-          <Route path="/res" element={<Res />}></Route>
         </Routes>
       </Flex>
     </Box>
