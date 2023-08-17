@@ -6,42 +6,23 @@ import { API } from "../../api/api";
 import { Select } from "@chakra-ui/react";
 
 const AddHodimBody = () => {
-  const [data, setData] = useState([]);
-  const [interest, setInterest] = useState([]);
-  console.log(interest);
-  console.log(data);
-
-  useEffect(() => {
-    axios
-      .get(`http://192.168.1.19:8080/api/education-level/all`, {
-        headers: {
-          "ngrok-skip-browser-warning": true,
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setData(res.data);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${API}api/interests/all`, {
-        headers: {
-          "ngrok-skip-browser-warning": true,
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setInterest(res.data);
-      });
-  }, []);
-
-  const [val, setVal] = useState("");
-  const [image, setImage] = useState("");
-  const [fileName, setFileName] = useState("Rasim mavjut emas!");
+    const [image , setImage] = useState(null)
+    const [fileName , setFileName] = useState("Rasim mavjut emas!")
+    const [allVal , setAllVal] = useState(null)
+    const [inter , setInter] = useState(null)
+    const options = [
+        {value: "O'rta mahsus" , label: "O'rta mahsus"},
+        {value: "Oliy ma'lumotli" , label: "Oliy ma'lumotli"},
+        {value: "O'rta ta'lim" , label: "O'rta ta'lim"},
+    ]
+    const Interest = [
+        {value: "Musiqa tinglash" , label: "Musiqa tinglash"},
+        {value: "Kitob o'qish" , label: "Kitob o'qish"},
+        {value: "O'qin o'ylash" , label: "O'qin o'ylash"},
+        {value: "Futbol ko'rish" , label: "Futbol ko'rish"},
+        {value: "Valebol o'ynash" , label: "Valebol o'ynash"},
+        {value: "Qizlar bilan yurish" , label: "Qizlar bilan yurish"},
+    ]
 
   return (
     <Box width={"100%"} p={"30px"} bg={"white"} rounded={"10px"}>
@@ -182,50 +163,28 @@ const AddHodimBody = () => {
           </Box>
         </Box>
 
-        <Box mt={"20px"}>
-          <Box
-            width={{ base: "100%", "2xl": "400px" }}
-            overflow={"auto"}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"center"}
-            rounded={"10px"}
-            height={"300px"}
-            bg={"#F0F0FF"}
-          >
-            <form action="">
-              <input
-                className="input-field"
-                hidden
-                type="file"
-                accept="image/*"
-                onChange={({ target: { files } }) => {
-                  files[0] && setFileName(files[0].name);
-                  if (files) {
-                    setImage(URL.createObjectURL(files[0]));
-                  }
-                }}
-              />
-              {image ? (
-                <img src={image} width={"380px"} alt={fileName} />
-              ) : (
-                <Heading fontSize={"32px"}>Hodim rasmi</Heading>
-              )}
-            </form>
-          </Box>
-          <Box>
-            <Button
-              onClick={() => document.querySelector(".input-field").click()}
-              mt={"20px"}
-              bg={"#10B981"}
-              color={"#fff"}
-              _hover={{ bg: "" }}
-              _active={{ bg: "" }}
-              width={"100%"}
-            >
-              Rasm tanlash
-            </Button>
-          </Box>
+            <Box mt={'20px'} >
+                <Box  width={{base: '100%' , '2xl': '400px'}} overflow={'auto'} display={'flex'} alignItems={'center'} justifyContent={'center'} rounded={'10px'} height={'300px'} bg={'#F0F0FF'}>
+                    <form action="" >
+                        <input  className='input-field'  hidden type="file" accept='image/*' onChange={({target: {files}}) => {
+                        files[0] && setFileName(files[0].name)
+                        if(files) {
+                            setImage(URL.createObjectURL(files[0]))
+                        }
+                        }}/>
+                        {image ? 
+                        <img src={image} width={'380px'}  alt={fileName} />
+                        : (
+                        <Heading fontSize={'32px'}>Hodim rasmi</Heading>
+                        )
+                    }
+                    </form>
+                </Box>
+                <Box >
+                    <Button onClick={() => document.querySelector('.input-field').click()} mt={'20px'} bg={'#10B981'} color={'#fff'} _hover={{bg: ''}} _active={{bg: ''}} width={'100%'}>Rasm tanlash</Button>
+                </Box>
+            </Box>
+
         </Box>
       </Box>
     </Box>

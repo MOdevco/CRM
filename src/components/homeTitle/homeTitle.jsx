@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Input, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Heading, Input, Select, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { useToast } from '@chakra-ui/react'
@@ -16,7 +16,6 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
-  Select
 } from '@chakra-ui/react'
 import { AiOutlineCloudUpload , AiOutlineFileImage } from 'react-icons/ai'
 import { MdDelete } from 'react-icons/md'
@@ -31,9 +30,13 @@ const HomeTitle = () => {
   const toast = useToast()
   const [dataItem , setDataItem] = useState({sid: '' , ssid: '' , description: '' , photo: ''})
   const [valid , setValid] = useState(false)
+
+  console.log(dataItem.photo)
   const handleFile = (e) => {
     setDataItem({...dataItem, photo: e.target.files[0]})
   }
+
+
   useEffect(() => {
       axios.get(`${API}api/subjects/all` , {
           headers: {
@@ -62,9 +65,13 @@ const HomeTitle = () => {
     
 
   const handleSubmit = () => {
+      if(dataItem.description === '1') {
+        setValid(false)
+      }
       if(dataItem.description === '') {
           setValid(true)
       } else {
+        
         const formData = new FormData()
         formData.append("sid" , Number(dataItem.sid))
         formData.append("ssid" , Number(dataItem.ssid))
@@ -139,7 +146,7 @@ const HomeTitle = () => {
                 <FormControl display={'flex'} width={'100%'} flexWrap={'wrap'} gap={'10px'} justifyContent={'space-between'}>
                   <Box>
                     <FormLabel color={'#A6A6A6'}>Fan</FormLabel>
-                    <Select width={'400px'} onChange={(e) => setDataItem({...dataItem, sid: e.target.value})}>
+                    <Select  width={'400px'} placeholder={"Fani tanlang"} styles={{width: '500px'}} isSearchable onChange={(e) => setDataItem({...dataItem, sid: e.target.value})}>
                       {data.map((item , i) => (
                         <option key={i}  value={Number(item.id)}>{item.name}</option>
                       ))}
@@ -148,7 +155,7 @@ const HomeTitle = () => {
 
                   <Box>
                     <FormLabel color={'#A6A6A6'}>Yo’nalish</FormLabel>
-                    <Select width={'400px'} onChange={(e) => setDataItem({...dataItem, ssid: e.target.value})}>
+                    <Select width={'400px'}  onChange={(e) => setDataItem({...dataItem, ssid: e.target.value})}>
                       {burn.map((burn , i) => (
                         <option key={i} value={Number(burn.id)}>{burn.name}</option>
                       ))}
@@ -173,7 +180,7 @@ const HomeTitle = () => {
                   {valid ? (
                     <Box>
                       <FormLabel color={'#A6A6A6'}>Qisqacha ma’lumot</FormLabel>
-                      <textarea className='valid' onChange={(e) => setDataItem({...dataItem, description: e.target.value})} placeholder="Ma'lumot..." style={{border: '1px solid red' , outline: 'none' , width: '100%' , padding: '10px' , filter: 'drop-shadow(1px 1px 4px red)'}} name="" id="" cols="117" rows="5"></textarea>
+                      <textarea className='valid' onChange={(e) => setDataItem({...dataItem, description: e.target.value})} placeholder="Ma'lumot..." style={{border: '1px solid red' , outline: 'none' , width: '100%' , padding: '10px' , filter: 'drop-shadow(1px 0px 1px red)'}} name="" id="" cols="117" rows="5"></textarea>
                     </Box>
                   ): (
                     <Box>
@@ -189,7 +196,7 @@ const HomeTitle = () => {
 
                 <Box border={'2px'} width={'100%'} onClick={() => document.querySelector('.input-field').click()}display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} height={'300px'}  borderColor={'#5D5FEF'} borderStyle={'dashed'}>
                   <form action="" >
-                    <input  className='input-field'  hidden type="file" accept='image/*' onChange={handleFile} />
+                    <input  className='input-field'  hidden type="file" accept='image/*' onChange={handleFile}/>
                     {dataItem.photo ? 
                     <img src={dataItem.photo[0]} width={'200px'} height={'200px'} alt={''} />
                     : (

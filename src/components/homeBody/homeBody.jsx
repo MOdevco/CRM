@@ -5,9 +5,21 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 // import HomeBodyKomp from '../homeBodyKop/homeBodyKomp'
 import HomeBodyAll from '../homeBodyAll/homeBodyAll'
 import axios from 'axios'
+import { API } from '../../api/api'
+import HomeBodyDasturlash from '../homeBodyDasturlsh/homeBodyDasturlash'
+import HomeBodyGrafik from '../homeBodyGrafik/homeBodyGrafik'
+import HomeBodyOnaTili from '../onaTili/onaTili'
+import HomeBodyAdab from '../homeBodyAdab/homeBodyAdab'
+import HomeBodyFizika from '../homeBodyFizika/homeBodyFizika'
+import HomeBodyEng from '../homeBodyEn/homeBodyEn'
+import HomeBodyRus from '../homeBodyRus/homrBodyRus'
 import HomeBodyTarix from '../homeBodyTarix/homeBodyTarix'
 import HomeBodyGeog from '../homeBodyGeog/homeBodyGeog'
-import { API } from '../../api/api'
+import HomeBodyBialog from '../homeBodyBialog/homeBodyBialog'
+import HomeBodyMuzik from '../homeBodyMuzik/homeBodyMuzik'
+import HomeBodyTasvir from '../homeBodyTasvir/homeBodyTasvir'
+import HomeBodyTex from '../homeBodyTex/homeBodyTex'
+import HomeBodyMatem from '../homeBodyMatem/homeBodyMatem'
 const HomeBody = () => {
 
     const [data , setData] = useState([])
@@ -38,9 +50,36 @@ const HomeBody = () => {
                 ))}
             </TabList>
 
+
+            
+
             <TabPanels mt={'15px'}>
                 <TabPanel>
                     <HomeBodyAll />
+                </TabPanel>
+                <TabPanel>
+                    <HomeBodyDasturlash />
+                </TabPanel>
+                <TabPanel>
+                    <HomeBodyGrafik />
+                </TabPanel>
+                <TabPanel>
+                    <HomeBodyMatem />
+                </TabPanel>
+                <TabPanel>
+                    <HomeBodyOnaTili />
+                </TabPanel>
+                <TabPanel>
+                    <HomeBodyAdab />
+                </TabPanel>
+                <TabPanel>
+                    <HomeBodyFizika />
+                </TabPanel>
+                <TabPanel>
+                    <HomeBodyEng />
+                </TabPanel>
+                <TabPanel>
+                    <HomeBodyRus />
                 </TabPanel>
                 <TabPanel>
                     <HomeBodyTarix />
@@ -49,11 +88,18 @@ const HomeBody = () => {
                     <HomeBodyGeog />
                 </TabPanel>
                 <TabPanel>
-                    {/* <HomeBodyEn /> */}
+                    <HomeBodyBialog />
                 </TabPanel>
                 <TabPanel>
-                    {/* <HomeBodyKomp /> */}
+                    <HomeBodyMuzik />
                 </TabPanel>
+                <TabPanel>
+                    <HomeBodyTasvir />
+                </TabPanel>
+                <TabPanel>
+                    <HomeBodyTex />
+                </TabPanel>
+                
             </TabPanels>
         </Tabs>
 

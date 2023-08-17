@@ -1,12 +1,13 @@
-import { Box, Fade, Spinner } from '@chakra-ui/react'
+import { Box, Spinner } from '@chakra-ui/react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Lottie from 'react-lottie'
 import { API } from '../../api/api'
 import DevCard from '../devCard/devCard'
+import HomeBodyGeogCard from '../homeBodyGeogCard/homeBodyGeogCard'
 import loader from '../loading.json'
 
-const HomeBodyGeog = () => {
+const HomeBodyOnaTili = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true, 
@@ -15,12 +16,11 @@ const HomeBodyGeog = () => {
       preserveAspectRatio: 'xMidYMid slice'
     }
   };
-  const [data , setData] = useState([])
   const [loading , setLoading] = useState(true)
-
+  const [data , setData] = useState([])
   useEffect(() => {
 
-    axios.get(`${API}api/org/ss/ss-by-org?sid=11` , {
+    axios.get(`${API}api/org/ss/ss-by-org?sid=4` , {
     
       headers: {
 
@@ -39,8 +39,7 @@ const HomeBodyGeog = () => {
 
         {data.map((item , i) => (
           <Box key={i}>
-             <DevCard title={item.subject.name} paragraph={item.description}  theme1={'Marketing'} theme2={'Business'} date={'25 Sep, 2022'} viwe={'01'} mess={'0'} colorSis={'orange'} prosent={15} likes={'02'} />
-
+            <DevCard title={item.subject.name} paragraph={item.description}  theme1={'Marketing'} theme2={'Business'} date={'25 Sep, 2022'} viwe={'01'} mess={'0'} colorSis={'orange'} prosent={15} likes={'02'} />
           </Box>
             
         ))}
@@ -49,9 +48,8 @@ const HomeBodyGeog = () => {
       {loading && <Box display={'flex'} justifyContent={'center'} alignItems={'center'} minHeight={'50vh'}>
         <Spinner width={'100px'} height={'100px'} />
       </Box>}
-      
     </Box>
   )
 }
 
-export default HomeBodyGeog
+export default HomeBodyOnaTili
