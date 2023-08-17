@@ -1,42 +1,53 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Spinner } from '@chakra-ui/react'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import Lottie from 'react-lottie'
 import { API } from '../../api/api'
-import {  lapto, mobile } from '../../assets'
 import DevCard from '../devCard/devCard'
+import HomeBodyGeogCard from '../homeBodyGeogCard/homeBodyGeogCard'
+import loader from '../loading.json'
 
 const HomeBodyTarix = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true, 
+    animationData: loader,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
   const [data , setData] = useState([])
-  useEffect(() => {
+  const [loading , setLoading] = useState(true)
 
+  useEffect(() => {
 
     axios.get(`${API}api/org/ss/ss-by-org?sid=10` , {
     
       headers: {
+
         "ngrok-skip-browser-warning": true,
         "Access-Control-Allow-Origin": "*",
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     }).then((res) => {
       setData(res.data)
+      setLoading(false)
     })
   } , [])
-
-  
-
-
   return (
-    <Box display={'flex'} gap={'30px'}  flexWrap={'wrap'}>
+    <Box>
+     {!loading && <Box display={'flex'} gap={'30px'} flexWrap={'wrap'} className='math'>
+        {data.map((item , i) => (
+          <Box key={i}>
+            <DevCard title={item.subject.name} paragraph={item.description}  theme1={'Marketing'} theme2={'Business'} date={'25 Sep, 2022'} viwe={'01'} mess={'0'} colorSis={'orange'} prosent={15} likes={'02'} />
+          </Box>
+            
+        ))}
+      </Box>}
 
-      {data.map((item , i) => (
-        <DevCard title={item.subject.name} paragraph={item.description} img={item.imageStore} theme1={'Marketing'} theme2={'Sales'} date={'25 Sep, 2022'} viwe={'04'} mess={'08'} likes={'24'}/>
-
-      ))}
-
-
-
-
-        
+      {loading && <Box display={'flex'} justifyContent={'center'} alignItems={'center'} minHeight={'50vh'}>
+        <Spinner width={'100px'} height={'100px'} />
+      </Box>}
     </Box>
   )
 }

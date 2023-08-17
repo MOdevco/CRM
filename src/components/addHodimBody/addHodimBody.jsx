@@ -11,6 +11,8 @@ const AddHodimBody = () => {
     const [fileName , setFileName] = useState("Rasim mavjut emas!")
     const [allVal , setAllVal] = useState(null)
     const [inter , setInter] = useState(null)
+
+    
     const options = [
         {value: "O'rta mahsus" , label: "O'rta mahsus"},
         {value: "Oliy ma'lumotli" , label: "Oliy ma'lumotli"},
@@ -140,7 +142,6 @@ const AddHodimBody = () => {
                 <Box  width={{base: '100%' , '2xl': '400px'}} overflow={'auto'} display={'flex'} alignItems={'center'} justifyContent={'center'} rounded={'10px'} height={'300px'} bg={'#F0F0FF'}>
                     <form action="" >
                         <input  className='input-field'  hidden type="file" accept='image/*' onChange={({target: {files}}) => {
-                        files[0] && setFileName(files[0].name)
                         if(files) {
                             setImage(URL.createObjectURL(files[0]))
                         }
