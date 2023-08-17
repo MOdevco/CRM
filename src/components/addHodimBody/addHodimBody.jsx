@@ -1,9 +1,9 @@
-import { Box, Button, Heading, Input} from "@chakra-ui/react";
+import { Box, Button, Heading, Input } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
 import axios from "axios";
 import { API } from "../../api/api";
-import { Select } from '@chakra-ui/react'
+import { Select } from "@chakra-ui/react";
 
 const AddHodimBody = () => {
   const [data, setData] = useState([]);
@@ -175,9 +175,9 @@ const AddHodimBody = () => {
             <FormLabel>Qiziqishlari</FormLabel>
 
             <Select>
-               {interest.map((item) => (
-                 <option key={item.id}> {item.name} </option>
-               ))}
+              {interest.map((item) => (
+                <option key={item.id}> {item.name} </option>
+              ))}
             </Select>
           </Box>
         </Box>
