@@ -13,7 +13,7 @@ const AddHodimBody = () => {
 
   useEffect(() => {
     axios
-      .get(`http://192.168.1.19:8080/api/education-level/all`, {
+      .get(`${API}api/education-level/all`, {
         headers: {
           "ngrok-skip-browser-warning": true,
           "Access-Control-Allow-Origin": "*",
