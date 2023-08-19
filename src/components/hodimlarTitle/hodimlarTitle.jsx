@@ -10,9 +10,11 @@ import {
     ModalCloseButton,
 } from '@chakra-ui/react'
 import { Select } from '@chakra-ui/react'
-import { useRef, useState } from "react"
+import axios from "axios"
+import { useEffect, useRef, useState } from "react"
 import { NavLink } from "react-router-dom"
-
+import { API } from "../../api/api"
+import { useToast } from '@chakra-ui/react'
 
 
 const HodimlarTitle = () => {
@@ -20,10 +22,80 @@ const HodimlarTitle = () => {
     const initialRef = useRef(null)
     const finalRef = useRef(null)
     const [size, setSize] = useState('md')
+    const [data , setData] = useState([])
+    const [dataItem , setDataItem] = useState([])
+    const [dataValue , setDataValue] = useState({cid: '' , fid: '' , start_date: ''})
+    const toast = useToast()
+    // console.log(dataValue)
     const handleSizeClick = (newSize) => {
         setSize(newSize)
         onOpen()
-      }
+    }
+
+    useEffect(() => {
+        axios.get(`${API}api/physical-face/all` , {
+            headers: {
+              "ngrok-skip-browser-warning": true,
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+          }).then((res) => {
+            setData(res.data)
+        })
+
+    } ,[])
+
+    useEffect(() => {
+        axios.get(`${API}api/stuff/all` , {
+            headers: {
+              "ngrok-skip-browser-warning": true,
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+          }).then((res) => {
+            setDataItem(res.data)
+        })
+    } ,[])
+
+    const handleSubmit = () => {
+        const formData = new FormData()
+        formData.append("cid" , Number(dataValue.cid))
+        formData.append("fid",  Number(dataValue.fid))
+        formData.append("start_date" , dataValue.start_date)
+        axios.post(`${API}api/physical-stuff/create` , formData , {
+            headers: {
+                "ngrok-skip-browser-warning": true,
+                "Access-Control-Allow-Origin": "*",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        }).then((res) => {
+            if(res.data.status == true) {
+                onClose()
+                toast({
+                    description: `${res.data.message}`,
+                    position: 'top-right',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                })
+            } 
+        }).catch((err) => {
+            // console.log(err.response.status)
+            // console.log(err.response.data.message)
+            toast({
+                description: `${err.response.data.message}`,
+                position: 'top-right',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
+        })
+    }
+
+
+    
+
+
     
       const sizes = ['md']
     return (
@@ -46,59 +118,59 @@ const HodimlarTitle = () => {
                                 </Button>
                             </NavLink>
                         </Box>
+                        <Box>
+                            {sizes.map((size) => (
+                                <Button  onClick={() => handleSizeClick(size)}key={size}my={7} bg={'#7364FF'} _hover={{bg: '#5364FF'}} height={'52px'} color={'white'} display={'flex'} gap={'10px'}>
+                                    <AddIcon />
+                                    Lavozimga taynlash
+                                </Button>
+                            ))}
+                            
+
+                            <Modal onClose={onClose} isOpen={isOpen} isCentered>
+                                <ModalOverlay />
+                                <ModalContent>
+                                <ModalHeader borderBottom={'8px'} borderColor={'gray'}>Jismoniy shahslarni lavozimga ta’yinlash</ModalHeader>
+                                <ModalBody display={'flex'} flexDirection={'column'} gap={'15px'}>
+
+                                    <FormControl>
+                                        <FormLabel>Jismoniy shahslar</FormLabel>
+                                        <Select onChange={(e) => setDataValue({...dataValue , fid: e.target.value})}>
+                                            {data.map((item , i) => (
+                                                <option key={i} value={Number(item.id)}>{item.firstName} {item.lastName} {item.middleName}</option>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+
+                                    <FormControl>
+                                        <FormLabel>Lavozimlar</FormLabel>
+                                        <Select onChange={(e) => setDataValue({...dataValue , cid: e.target.value})}>
+                                            {dataItem.map((item , i) => (
+                                                <option key={i} value={Number(item.id)}>{item.name}</option>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+
+                                    <FormControl mt={4}>
+                                        <FormLabel>Sanadan boshlab</FormLabel>
+                                        <Input type={'date'} onChange={(e) => setDataValue({...dataValue , start_date: e.target.value})} />
+                                    </FormControl>
+
+                                    <FormControl mt={4}>
+                                        <FormLabel>Sanagacha</FormLabel>
+                                        <Input disabled type={'date'} />
+                                    </FormControl>
+
+                                </ModalBody>
+                                <ModalFooter display={'flex'} gap={'20px'}>
+                                    <Button bg={'#DBDBDB'} onClick={onClose}>Bekor qilish</Button>
+                                    <Button onClick={handleSubmit} bg={'#10B981'} _hover={{bg: '#29B981'}} color={'white'}>Biriktirish</Button>
+                                </ModalFooter>
+                                </ModalContent>
+                            </Modal>
+                        </Box>
                     </Box>
                     
-                    <Box  position={'relative'} zIndex={'10'}>
-                        {sizes.map((size) => (
-                            <Button  onClick={() => handleSizeClick(size)}key={size}my={7} bg={'#7364FF'} _hover={{bg: '#5364FF'}} height={'42px'} color={'white'} display={'flex'} gap={'10px'}>
-                                <AddIcon />
-                                Lavozimga taynlash
-                            </Button>
-                        ))}
-                        
-
-                        <Modal onClose={onClose} isOpen={isOpen} isCentered>
-                            <ModalOverlay />
-                            <ModalContent>
-                            <ModalHeader borderBottom={'8px'} borderColor={'gray'}>Jismoniy shahslarni lavozimga ta’yinlash</ModalHeader>
-                            <ModalBody display={'flex'} flexDirection={'column'} gap={'15px'}>
-
-                                <FormControl>
-                                    <FormLabel>Jismoniy shahslar</FormLabel>
-                                    <Select >
-                                        <option value='option1'>Tursunali Xorinaliyev Xaydaraliyevich</option>
-                                        <option value='option1'>Tursunali Xorinaliyev Xaydaraliyevich</option>
-                                        <option value='option2'>Muhammadali Anvarov Jahongirovich</option>
-                                    </Select>
-                                </FormControl>
-
-                                <FormControl>
-                                    <FormLabel>Lavozimlar</FormLabel>
-                                    <Select >
-                                        <option value='option1'>O’qituvchi</option>
-                                        <option value='option1'>Qorovul</option>
-                                        <option value='option1'>Farosh</option>
-                                    </Select>
-                                </FormControl>
-
-                                <FormControl mt={4}>
-                                    <FormLabel>Sanadan boshlab</FormLabel>
-                                    <Input type={'date'} />
-                                </FormControl>
-
-                                <FormControl mt={4}>
-                                    <FormLabel>Sanagacha</FormLabel>
-                                    <Input disabled type={'date'} />
-                                </FormControl>
-
-                            </ModalBody>
-                            <ModalFooter display={'flex'} gap={'20px'}>
-                                <Button bg={'#DBDBDB'} onClick={onClose}>Bekor qilish</Button>
-                                <Button bg={'#10B981'} _hover={{bg: '#29B981'}} color={'white'}>Biriktirish</Button>
-                            </ModalFooter>
-                            </ModalContent>
-                        </Modal>
-                    </Box>
                 </Box>
             </Box>
 

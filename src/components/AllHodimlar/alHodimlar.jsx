@@ -1,5 +1,5 @@
-import { Avatar, Box, Button, Checkbox, Heading, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Avatar, Box, Button, Checkbox, Heading, Image, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import {
   Table,
   Thead,
@@ -14,17 +14,38 @@ import {
 import { hodimlar } from '../../test/text'
 import { CiReceipt } from 'react-icons/ci'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+import axios from 'axios'
+import { API } from '../../api/api'
+import HodimImg from '../hodimImg/hodimImg'
 
 const AllHodimlar = () => {
   const [total , setTotal] = useState(42)
   const test = hodimlar
+  const [data , setData] = useState([])
+  const [dataImg , setDataImg] = useState('')
+  console.log(data)
+
+  useEffect(() => {
+    axios.get(`${API}api/physical-stuff/all` , {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      setData(res.data)
+    })
+  } , [])
+  
+
+  
 
 
   return (
-    <Box height={'0vh'} >
+    <Box height={'65vh'} overflow={'auto'}>
       <Box bg={'white'} p={'30px'} rounded={'10px'} display={'flex'}   flexDirection={'column'} gap={'20px'}>
         
-        <Box  display={'flex'} justifyContent={'space-between'}>
+        <Box position={'sticky'} rounded={'10px'} p={'10px'} top={0} bg={'white'} display={'flex'} justifyContent={'space-between'}>
           <Text fontSize={'24px'} color={'#4D515A'}>Barchasi</Text>
           <Text fontSize={'24px'} color={'#4D515A'}>Ja’mi {total} ta</Text>
         </Box>
@@ -32,9 +53,9 @@ const AllHodimlar = () => {
         <Box >
           <TableContainer >
             <Table  variant='simple'>
-              <Thead  >
-                <Tr>
-                  <Th color={'gray.400'} ><Checkbox pr={'10px'}></Checkbox>FIO</Th>
+              <Thead >
+                <Tr >
+                  <Th color={'gray.400'} >FIO</Th>
                   <Th color={'gray.400'} >Address</Th>
                   <Th color={'gray.400'} >Tug’ilgan sanasi</Th>
                   <Th color={'gray.400'} >Passport</Th>
@@ -44,16 +65,16 @@ const AllHodimlar = () => {
 
                 </Tr>
               </Thead>
-              <Tbody >
-                {test.map((hodim , i) => (
+              <Tbody overflow={'auto'}>
+                {data.map((hodim , i) => (
                   <Tr key={i} borderBottom={'1px'} borderColor={'#E2E8F0'}  >
-                      <Th color={'gray.500'}><Checkbox pr={'10px'} ></Checkbox>{hodim.name}</Th>
-                      <Th color={'gray.500'}>{hodim.location}</Th>
-                      <Th color={'gray.500'}>{hodim.dataB}</Th>
-                      <Th color={'gray.500'}>{hodim.pass}</Th>
-                      <Th color={'gray.500'}>{hodim.tel}</Th>
-                      <Th color={'gray.500'}><Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' width={'30px'} height={'30px'} /></Th>
-                      <Th color={'gray.500'}><CiReceipt fontSize={'30px'} color={'#7364FF'} /></Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.firstName} {hodim.physicalFace.lastName} {hodim.physicalFace.middleName}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.address}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.birthday}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.personalIdentification}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.primaryPhone}</Th>
+                      <Th pl={'30px'} color={'gray.500'}><HodimImg img={hodim.physicalFace.photo} /></Th>
+                      <Th pl={'35px'}  color={'gray.500'}><CiReceipt fontSize={'30px'} color={'#7364FF'} /></Th>
 
                   </Tr>
                 ))}
@@ -64,7 +85,7 @@ const AllHodimlar = () => {
           </TableContainer>
         </Box>
 
-        <Box display={'flex'} alignItems={'center'} gap={'20px'} justifyContent={'flex-end'}>
+        <Box display={'flex'} position={'sticky'} top={''} alignItems={'center'} gap={'20px'} justifyContent={'flex-end'}>
           <Box display={'flex'} gap={'20px'} alignItems={'center'}>
             <Text color={'gray.400'}>Sahifasiga ma’lumotlar soni: 20 1-10  87 ta dan</Text>
             <Text color={'gray.400'}>1-10  87 ta dan</Text>

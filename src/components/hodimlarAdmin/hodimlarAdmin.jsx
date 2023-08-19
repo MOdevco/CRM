@@ -34,7 +34,7 @@ const HodimlarAdmin = () => {
             <Table  variant='simple'>
               <Thead  >
                 <Tr>
-                  <Th color={'gray.400'} ><Checkbox pr={'10px'}></Checkbox>FIO</Th>
+                  <Th color={'gray.400'} >FIO</Th>
                   <Th color={'gray.400'} >Address</Th>
                   <Th color={'gray.400'} >Tug’ilgan sanasi</Th>
                   <Th color={'gray.400'} >Passport</Th>
@@ -47,7 +47,7 @@ const HodimlarAdmin = () => {
               <Tbody >
                 {test.map((hodim , i) => (
                   <Tr key={i} borderBottom={'1px'} borderColor={'#E2E8F0'}  >
-                      <Th color={'gray.500'}><Checkbox pr={'10px'} ></Checkbox>{hodim.name}</Th>
+                      <Th color={'gray.500'}>{hodim.name}</Th>
                       <Th color={'gray.500'}>{hodim.location}</Th>
                       <Th color={'gray.500'}>{hodim.dataB}</Th>
                       <Th color={'gray.500'}>{hodim.pass}</Th>
