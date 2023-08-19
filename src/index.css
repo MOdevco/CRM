@@ -64,10 +64,6 @@
 
  
 .select1{
-  width: 100%;
   height: 120px;
-  outline: none;
-  border: 1px solid #D0D5DD;
-  padding-left: 25px;
-  border-radius: 8px;
+ 
 }

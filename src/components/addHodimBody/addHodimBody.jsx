@@ -3,13 +3,11 @@ import React, { useEffect, useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
 import axios from "axios";
 import { API } from "../../api/api";
-import { Select } from "@chakra-ui/react";
+import SelectChip from "../selectChip/SelectChip";
 
 const AddHodimBody = () => {
   const [data, setData] = useState([]);
   const [interest, setInterest] = useState([]);
-  console.log(interest);
-  console.log(data);
 
   useEffect(() => {
     axios
@@ -22,20 +20,6 @@ const AddHodimBody = () => {
       })
       .then((res) => {
         setData(res.data);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${API}api/interests/all`, {
-        headers: {
-          "ngrok-skip-browser-warning": true,
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setInterest(res.data);
       });
   }, []);
 
@@ -173,12 +157,7 @@ const AddHodimBody = () => {
 
           <Box display={"flex"} flexDirection={"column"}>
             <FormLabel>Qiziqishlari</FormLabel>
-
-            <Select>
-              {interest.map((item) => (
-                <option key={item.id}> {item.name} </option>
-              ))}
-            </Select>
+            <SelectChip />
           </Box>
         </Box>
 
@@ -233,4 +212,3 @@ const AddHodimBody = () => {
 };
 
 export default AddHodimBody;
-    
