@@ -31,7 +31,7 @@ const HomeTitle = () => {
   const [dataItem , setDataItem] = useState({sid: '' , ssid: '' , description: '' , photo: ''})
   const [valid , setValid] = useState(false)
 
-  console.log(dataItem.photo)
+  console.log(dataItem)
   const handleFile = (e) => {
     setDataItem({...dataItem, photo: e.target.files[0]})
   }
@@ -73,12 +73,14 @@ const HomeTitle = () => {
       } else {
         
         const formData = new FormData()
-        formData.append("sid" , Number(dataItem.sid))
-        formData.append("ssid" , Number(dataItem.ssid))
+        formData.append("sid" , dataItem.sid)
+        formData.append("ssid" , dataItem.ssid)
         formData.append("description",  dataItem.description)
         formData.append("photo" , dataItem.photo)
         axios.post(`${API}api/org/ss/create` , formData , {
           headers: {
+            "ngrok-skip-browser-warning": true,
+            "Access-Control-Allow-Origin": "*",
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }
         }).then((res) => {
