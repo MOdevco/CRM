@@ -22,6 +22,7 @@ const AllHodimlar = ({setCount}) => {
   const [total , setTotal] = useState([])
   const test = hodimlar
   const [data , setData] = useState([])
+  const [dataImg , setDataImg] = useState('')
 
   useEffect(() => {
     axios.get(`${API}api/physical-stuff/all` , {
