@@ -6,32 +6,25 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
-  ModalCloseButton,
 } from '@chakra-ui/react'
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
 } from '@chakra-ui/react'
-import { AiOutlineCloudUpload , AiOutlineFileImage } from 'react-icons/ai'
 import { MdDelete } from 'react-icons/md'
 import axios from 'axios'
 import { API } from '../../api/api'
 
 const HomeTitle = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [size, setSize] = React.useState('md')
+  const [size, setSize] = useState('md')
   const [data , setData] = useState([])
   const [burn , setBurn] = useState([])
   const toast = useToast()
   const [dataItem , setDataItem] = useState({sid: '' , ssid: '' , description: '' , photo: ''})
   const [valid , setValid] = useState(false)
 
-  console.log(dataItem)
   const handleFile = (e) => {
     setDataItem({...dataItem, photo: e.target.files[0]})
   }

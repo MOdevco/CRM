@@ -3,8 +3,10 @@ import React from 'react'
 import HodimlarBody from '../components/hodimlarBody/hodimlarBody'
 import HodimlarTitle from '../components/hodimlarTitle/hodimlarTitle'
 import HodimlarTopLink from '../components/hodimlarTopLink/hodimlarTopLink'
-
 const Hodimlar = () => {
+
+ 
+
   return (
     <Box width={'100%'} minHeight={'100vh'} >
 
