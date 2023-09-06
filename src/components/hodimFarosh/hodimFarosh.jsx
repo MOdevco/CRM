@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Checkbox, Heading, Image, Spinner, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Checkbox, Heading, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import {
   Table,
@@ -11,24 +11,24 @@ import {
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react'
-import { hodimlar } from '../../test/text'
+import { ustozlar } from '../../test/text'
 import { CiReceipt } from 'react-icons/ci'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import axios from 'axios'
 import { API } from '../../api/api'
 import HodimImg from '../hodimImg/hodimImg'
 
-const AllHodimlar = ({setCount}) => {
-  const [total , setTotal] = useState([])
-  const test = hodimlar
+
+const HodimFarosh = () => {
+  const [total , setTotal] = useState(22)
   const [data , setData] = useState([])
   const [loading , setLoading] = useState(true)
-  setCount(data.length)
- 
-
-
+    
+  
   useEffect(() => {
-    axios.get(`${API}api/physical-stuff/all` , {
+    
+
+    axios.get(`${API}api/physical-stuff/by-category?cid=7` , {
       headers: {
         "ngrok-skip-browser-warning": true,
         "Access-Control-Allow-Origin": "*",
@@ -39,25 +39,26 @@ const AllHodimlar = ({setCount}) => {
       setLoading(false)
     })
   } , [])
-  
-
-  
 
 
   return (
-    <Box height={'65vh'} overflow={'auto'}>
-      <Box bg={'white'} p={'30px'} rounded={'10px'} display={'flex'}   flexDirection={'column'} gap={'20px'}>
+    <Box >
+
+
+
+      <Box bg={'white'} p={'30px'} rounded={'10px'} display={'flex'} flexDirection={'column'} gap={'20px'}>
         
-        <Box position={'sticky'} rounded={'10px'} zIndex={10} p={'10px'} top={0} bg={'white'} display={'flex'} justifyContent={'space-between'}>
-          <Text fontSize={'24px'} color={'#4D515A'}>Barchasi</Text>
+        <Box  display={'flex'} justifyContent={'space-between'}>
+          <Text fontSize={'24px'} color={'#4D515A'}>O’qituvchilar</Text>
           <Text fontSize={'24px'} color={'#4D515A'}>Ja’mi {data.length} ta</Text>
+
         </Box>
 
         <Box >
           <TableContainer >
             <Table  variant='simple'>
-              <Thead position={'sticky'} top={'0'} >
-                <Tr >
+              <Thead  >
+                <Tr>
                   <Th color={'gray.400'} >FIO</Th>
                   <Th color={'gray.400'} >Address</Th>
                   <Th color={'gray.400'} >Tug’ilgan sanasi</Th>
@@ -68,40 +69,33 @@ const AllHodimlar = ({setCount}) => {
 
                 </Tr>
               </Thead>
-
-
-
-             {!loading && <Tbody overflow={'auto'}>
+              <Tbody >
                 {data.map((hodim , i) => (
-                    <Tr key={i} borderBottom={'1px'} borderColor={'#E2E8F0'}  >                    
-                        <Th color={'gray.500'}>{hodim.physicalFace.firstName} {hodim.physicalFace.lastName} {hodim.physicalFace.middleName}</Th>
-                        <Th color={'gray.500'}>{hodim.physicalFace.address}</Th>
-                        <Th color={'gray.500'}>{hodim.physicalFace.birthday}</Th>
-                        <Th color={'gray.500'}>{hodim.physicalFace.personalIdentification}</Th>
-                        <Th color={'gray.500'}>{hodim.physicalFace.primaryPhone}</Th>
-                        <Th color={'gray.500'}><HodimImg img={hodim.physicalFace.photo} /></Th>
-                        <Th color={'gray.500'}><CiReceipt fontSize={'30px'} color={'#7364FF'} /></Th>
+                  <Tr key={i} borderBottom={'1px'} borderColor={'#E2E8F0'}  >
+                      <Th color={'gray.500'}>{hodim.physicalFace.firstName} {hodim.physicalFace.lastName} {hodim.physicalFace.middleName}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.address}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.birthday}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.personalIdentification}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.secondaryPhone}</Th>
+                      <Th color={'gray.500'}><HodimImg img={hodim.physicalFace.phone}></HodimImg></Th>
+                      <Th color={'gray.500'}><CiReceipt fontSize={'30px'} color={'#7364FF'} /></Th>
 
-                    </Tr>
+                  </Tr>
                 ))}
                 
-              </Tbody>}
-
+              </Tbody>
           
             </Table>
-              {loading && <Box display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} width={'100%'} minHeight={'30vh'}>
-                <Spinner width={'100px'} height={'100px'} />
-              </Box>}
           </TableContainer>
         </Box>
 
-        <Box display={'flex'} position={'sticky'} top={''} alignItems={'center'} gap={'20px'} justifyContent={'flex-end'}>
+        <Box display={'flex'} alignItems={'center'} gap={'20px'} justifyContent={'flex-end'}>
           <Box display={'flex'} gap={'20px'} alignItems={'center'}>
             <Text color={'gray.400'}>Sahifasiga ma’lumotlar soni: 20 1-10  87 ta dan</Text>
             <Text color={'gray.400'}>1-10  87 ta dan</Text>
           </Box>
           <Box display={'flex'} gap={'20px'}>
-            <Button bg={'#F1F2F4'} _hover={{bg: ''}} _active={{bg: ''}} color={'gray'}>
+            <Button bg={'#F1F2F4'} _hover={{bg: ''}} _active={{bg: ''}} color={'#5D5FEF'}>
               <ArrowBackIcon />
               Oldingisi
             </Button>
@@ -118,4 +112,4 @@ const AllHodimlar = ({setCount}) => {
   )
 }
 
-export default AllHodimlar
+export default HodimFarosh

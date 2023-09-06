@@ -18,12 +18,13 @@ const HodimImg = ({img}) => {
           setDataImg(res.data)
         })
       } , [])
-  return (
-    <Box>
+      
+    return (
+        <Box>
 
-        <Image rounded={'50%'} width={'30px'} height={'30px'} src={`data:image/png;base64,${dataImg}`}></Image>
+            <Image rounded={'50%'} width={'30px'} height={'30px'} src={`data:image/png;base64,${dataImg}`}></Image>
 
-    </Box>
+        </Box>
   )
 }
 
