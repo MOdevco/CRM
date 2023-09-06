@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Checkbox, Heading, Image, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Checkbox, Heading, Image, Spinner, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import {
   Table,
@@ -18,11 +18,10 @@ import axios from 'axios'
 import { API } from '../../api/api'
 import HodimImg from '../hodimImg/hodimImg'
 
-const AllHodimlar = () => {
-  const [total , setTotal] = useState(42)
+const AllHodimlar = ({setCount}) => {
+  const [total , setTotal] = useState([])
   const test = hodimlar
   const [data , setData] = useState([])
-  const [dataImg , setDataImg] = useState('')
 
   useEffect(() => {
     axios.get(`${API}api/physical-stuff/all` , {
@@ -33,6 +32,7 @@ const AllHodimlar = () => {
       }
     }).then((res) => {
       setData(res.data)
+      setLoading(false)
     })
   } , [])
   
@@ -44,15 +44,15 @@ const AllHodimlar = () => {
     <Box height={'65vh'} overflow={'auto'}>
       <Box bg={'white'} p={'30px'} rounded={'10px'} display={'flex'}   flexDirection={'column'} gap={'20px'}>
         
-        <Box position={'sticky'} rounded={'10px'} p={'10px'} top={0} bg={'white'} display={'flex'} justifyContent={'space-between'}>
+        <Box position={'sticky'} rounded={'10px'} zIndex={10} p={'10px'} top={0} bg={'white'} display={'flex'} justifyContent={'space-between'}>
           <Text fontSize={'24px'} color={'#4D515A'}>Barchasi</Text>
-          <Text fontSize={'24px'} color={'#4D515A'}>Ja’mi {total} ta</Text>
+          <Text fontSize={'24px'} color={'#4D515A'}>Ja’mi {data.length} ta</Text>
         </Box>
 
         <Box >
           <TableContainer >
             <Table  variant='simple'>
-              <Thead >
+              <Thead position={'sticky'} top={'0'} >
                 <Tr >
                   <Th color={'gray.400'} >FIO</Th>
                   <Th color={'gray.400'} >Address</Th>
@@ -64,23 +64,30 @@ const AllHodimlar = () => {
 
                 </Tr>
               </Thead>
-              <Tbody overflow={'auto'}>
-                {data.map((hodim , i) => (
-                  <Tr key={i} borderBottom={'1px'} borderColor={'#E2E8F0'}  >
-                      <Th color={'gray.500'}>{hodim.physicalFace.firstName} {hodim.physicalFace.lastName} {hodim.physicalFace.middleName}</Th>
-                      <Th color={'gray.500'}>{hodim.physicalFace.address}</Th>
-                      <Th color={'gray.500'}>{hodim.physicalFace.birthday}</Th>
-                      <Th color={'gray.500'}>{hodim.physicalFace.personalIdentification}</Th>
-                      <Th color={'gray.500'}>{hodim.physicalFace.primaryPhone}</Th>
-                      <Th pl={'30px'} color={'gray.500'}><HodimImg img={hodim.physicalFace.photo} /></Th>
-                      <Th pl={'35px'}  color={'gray.500'}><CiReceipt fontSize={'30px'} color={'#7364FF'} /></Th>
 
-                  </Tr>
+
+
+             {!loading && <Tbody overflow={'auto'}>
+                {data.map((hodim , i) => (
+                    <Tr key={i} borderBottom={'1px'} borderColor={'#E2E8F0'}  >                    
+                        <Th color={'gray.500'}>{hodim.physicalFace.firstName} {hodim.physicalFace.lastName} {hodim.physicalFace.middleName}</Th>
+                        <Th color={'gray.500'}>{hodim.physicalFace.address}</Th>
+                        <Th color={'gray.500'}>{hodim.physicalFace.birthday}</Th>
+                        <Th color={'gray.500'}>{hodim.physicalFace.personalIdentification}</Th>
+                        <Th color={'gray.500'}>{hodim.physicalFace.primaryPhone}</Th>
+                        <Th color={'gray.500'}><HodimImg img={hodim.physicalFace.photo} /></Th>
+                        <Th color={'gray.500'}><CiReceipt fontSize={'30px'} color={'#7364FF'} /></Th>
+
+                    </Tr>
                 ))}
                 
-              </Tbody>
+              </Tbody>}
+
           
             </Table>
+              {loading && <Box display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} width={'100%'} minHeight={'30vh'}>
+                <Spinner width={'100px'} height={'100px'} />
+              </Box>}
           </TableContainer>
         </Box>
 

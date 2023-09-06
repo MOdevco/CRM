@@ -19,7 +19,7 @@ import { API } from '../../api/api'
 import HodimImg from '../hodimImg/hodimImg'
 
 
-const HodimHelpTech = () => {
+const DOrinbosar = () => {
   const [total , setTotal] = useState(22)
   const [data , setData] = useState([])
   const [loading , setLoading] = useState(true)
@@ -28,7 +28,7 @@ const HodimHelpTech = () => {
   useEffect(() => {
     
 
-    axios.get(`${API}api/physical-stuff/by-category?cid=4` , {
+    axios.get(`${API}api/physical-stuff/by-category?cid=2` , {
       headers: {
         "ngrok-skip-browser-warning": true,
         "Access-Control-Allow-Origin": "*",
@@ -112,4 +112,4 @@ const HodimHelpTech = () => {
   )
 }
 
-export default HodimHelpTech
+export default DOrinbosar

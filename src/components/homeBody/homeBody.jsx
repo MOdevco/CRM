@@ -7,23 +7,11 @@ import HomeBodyAll from '../homeBodyAll/homeBodyAll'
 import axios from 'axios'
 import { API } from '../../api/api'
 import HomeBodyDasturlash from '../homeBodyDasturlsh/homeBodyDasturlash'
-import HomeBodyGrafik from '../homeBodyGrafik/homeBodyGrafik'
-import HomeBodyOnaTili from '../onaTili/onaTili'
-import HomeBodyAdab from '../homeBodyAdab/homeBodyAdab'
-import HomeBodyFizika from '../homeBodyFizika/homeBodyFizika'
-import HomeBodyEng from '../homeBodyEn/homeBodyEn'
-import HomeBodyRus from '../homeBodyRus/homrBodyRus'
-import HomeBodyTarix from '../homeBodyTarix/homeBodyTarix'
-import HomeBodyGeog from '../homeBodyGeog/homeBodyGeog'
-import HomeBodyBialog from '../homeBodyBialog/homeBodyBialog'
-import HomeBodyMuzik from '../homeBodyMuzik/homeBodyMuzik'
-import HomeBodyTasvir from '../homeBodyTasvir/homeBodyTasvir'
-import HomeBodyTex from '../homeBodyTex/homeBodyTex'
-import HomeBodyMatem from '../homeBodyMatem/homeBodyMatem'
 const HomeBody = () => {
 
     const [data , setData] = useState([])
-
+    const [id , setId] = useState([])
+    
     useEffect(() => {
         axios.get(`${API}api/org/ss/org-subjects` , {
             headers: {
@@ -33,8 +21,11 @@ const HomeBody = () => {
             }
         }).then((res) => {
             setData(res.data)
+            setId(res.data)
         })
     } ,[])
+
+
 
 
   return (
@@ -55,51 +46,14 @@ const HomeBody = () => {
 
             <TabPanels mt={'15px'}>
                 <TabPanel>
-                    <HomeBodyAll />
+                    <HomeBodyAll  />
                 </TabPanel>
-                <TabPanel>
-                    <HomeBodyDasturlash />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyGrafik />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyMatem />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyOnaTili />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyAdab />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyFizika />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyEng />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyRus />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyTarix />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyGeog />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyBialog />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyMuzik />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyTasvir />
-                </TabPanel>
-                <TabPanel>
-                    <HomeBodyTex />
-                </TabPanel>
-                
+
+                {id.map((item , i) => (
+                    <TabPanel key={i}>
+                        <HomeBodyDasturlash id={item.id}  />
+                    </TabPanel>
+                ))}
             </TabPanels>
         </Tabs>
 

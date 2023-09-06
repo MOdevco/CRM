@@ -4,11 +4,8 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
-  Td,
-  TableCaption,
   TableContainer,
 } from '@chakra-ui/react'
 import { ustozlar } from '../../test/text'
@@ -19,7 +16,7 @@ import { API } from '../../api/api'
 import HodimImg from '../hodimImg/hodimImg'
 
 
-const HodimHelpTech = () => {
+const HodimQorovul = () => {
   const [total , setTotal] = useState(22)
   const [data , setData] = useState([])
   const [loading , setLoading] = useState(true)
@@ -28,7 +25,7 @@ const HodimHelpTech = () => {
   useEffect(() => {
     
 
-    axios.get(`${API}api/physical-stuff/by-category?cid=4` , {
+    axios.get(`${API}api/physical-stuff/by-category?cid=6` , {
       headers: {
         "ngrok-skip-browser-warning": true,
         "Access-Control-Allow-Origin": "*",
@@ -112,4 +109,4 @@ const HodimHelpTech = () => {
   )
 }
 
-export default HodimHelpTech
+export default HodimQorovul

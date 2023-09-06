@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Checkbox, Heading, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Table,
   Thead,
@@ -14,11 +14,33 @@ import {
 import { ustozlar } from '../../test/text'
 import { CiReceipt } from 'react-icons/ci'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+import axios from 'axios'
+import { API } from '../../api/api'
+import HodimImg from '../hodimImg/hodimImg'
 
 
 const Ustozlar = () => {
   const [total , setTotal] = useState(22)
-  const test = ustozlar
+  const [data , setData] = useState([])
+  const [loading , setLoading] = useState(true)
+    
+  
+  useEffect(() => {
+    
+
+    axios.get(`${API}api/physical-stuff/by-category?cid=3` , {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      setData(res.data)
+      setLoading(false)
+    })
+  } , [])
+
+
   return (
     <Box >
 
@@ -28,6 +50,8 @@ const Ustozlar = () => {
         
         <Box  display={'flex'} justifyContent={'space-between'}>
           <Text fontSize={'24px'} color={'#4D515A'}>O’qituvchilar</Text>
+          <Text fontSize={'24px'} color={'#4D515A'}>Ja’mi {data.length} ta</Text>
+
         </Box>
 
         <Box >
@@ -46,14 +70,14 @@ const Ustozlar = () => {
                 </Tr>
               </Thead>
               <Tbody >
-                {test.map((hodim , i) => (
+                {data.map((hodim , i) => (
                   <Tr key={i} borderBottom={'1px'} borderColor={'#E2E8F0'}  >
-                      <Th color={'gray.500'}>{hodim.name}</Th>
-                      <Th color={'gray.500'}>{hodim.location}</Th>
-                      <Th color={'gray.500'}>{hodim.dataB}</Th>
-                      <Th color={'gray.500'}>{hodim.pass}</Th>
-                      <Th color={'gray.500'}>{hodim.tel}</Th>
-                      <Th color={'gray.500'}><Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' width={'30px'} height={'30px'} /></Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.firstName} {hodim.physicalFace.lastName} {hodim.physicalFace.middleName}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.address}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.birthday}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.personalIdentification}</Th>
+                      <Th color={'gray.500'}>{hodim.physicalFace.secondaryPhone}</Th>
+                      <Th color={'gray.500'}><HodimImg img={hodim.physicalFace.phone}></HodimImg></Th>
                       <Th color={'gray.500'}><CiReceipt fontSize={'30px'} color={'#7364FF'} /></Th>
 
                   </Tr>

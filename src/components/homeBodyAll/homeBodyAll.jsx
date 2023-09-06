@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react'
 import { API } from '../../api/api'
 import DevCard from '../devCard/devCard'
 
-const HomeBodyAll = () => {
+const HomeBodyAll = ({id}) => {
     const [data , setData] = useState([])
     const [loading , setLoading] = useState(true)
 
     useEffect(() => {
-      axios.get(`${API}api/org/ss/all-by-org` , {
+      axios.get(`${API}api/org/ss/all-by-org?=${id}` , {
         headers: {
           "ngrok-skip-browser-warning": true,
           "Access-Control-Allow-Origin": "*",

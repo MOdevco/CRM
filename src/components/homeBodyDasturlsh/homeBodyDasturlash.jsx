@@ -4,13 +4,13 @@ import React, { useEffect, useState } from 'react'
 import { API } from '../../api/api'
 import DevCard from '../devCard/devCard'
 
-const HomeBodyDasturlash = () => {
+const HomeBodyDasturlash = ({id}) => {
   const [data , setData] = useState([])
   const [loading , setLoading] = useState(true)
   useEffect(() => {
 
 
-    axios.get(`${API}api/org/ss/ss-by-org?sid=1` , {
+    axios.get(`${API}api/org/ss/ss-by-org?sid=${id}` , {
     
       headers: {
         "ngrok-skip-browser-warning": true,
