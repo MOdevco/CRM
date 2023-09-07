@@ -26,7 +26,7 @@ const AllHodimlar = ({setCount}) => {
   const [loading , setLoading] = useState()
 
   useEffect(() => {
-    axios.get(`${API}api/physical-stuff/all` , {
+    axios.get(`${API}api/physical-stuff/all` , {      
       headers: {
         "ngrok-skip-browser-warning": true,
         "Access-Control-Allow-Origin": "*",
