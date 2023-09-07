@@ -141,7 +141,8 @@ const HomeTitle = () => {
                 <FormControl display={'flex'} width={'100%'} flexWrap={'wrap'} gap={'10px'} justifyContent={'space-between'}>
                   <Box>
                     <FormLabel color={'#A6A6A6'}>Fan</FormLabel>
-                    <Select  width={'400px'} placeholder={"Fani tanlang"} styles={{width: '500px'}} isSearchable onChange={(e) => setDataItem({...dataItem, sid: e.target.value})}>
+                    <Select  width={'400px'} styles={{width: '500px'}} isSearchable onChange={(e) => setDataItem({...dataItem, sid: e.target.value})}>
+                      <option value="" disabled selected className='option'>Fani tanlang</option>
                       {data.map((item , i) => (
                         <option key={i}  value={Number(item.id)}>{item.name}</option>
                       ))}
@@ -151,6 +152,7 @@ const HomeTitle = () => {
                   <Box>
                     <FormLabel color={'#A6A6A6'}>Yo’nalish</FormLabel>
                     <Select width={'400px'}  onChange={(e) => setDataItem({...dataItem, ssid: e.target.value})}>
+                      <option value="" disabled selected className='option'>Yo’nalishni tanlang</option>
                       {burn.map((burn , i) => (
                         <option key={i} value={Number(burn.id)}>{burn.name}</option>
                       ))}

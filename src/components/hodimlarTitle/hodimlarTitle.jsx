@@ -135,9 +135,10 @@ const HodimlarTitle = () => {
 
                                     <FormControl>
                                         <FormLabel>Jismoniy shahslar</FormLabel>
-                                        <Select onChange={(e) => setDataValue({...dataValue , fid: e.target.value})}>
+                                        <Select  onChange={(e) => setDataValue({...dataValue , fid: e.target.value})}>
+                                            <option selected disabled className="option" value="">Jismoniy shahslar</option>
                                             {data.map((item , i) => (
-                                                <option key={i} value={Number(item.id)}>{item.firstName} {item.lastName} {item.middleName}</option>
+                                                <option key={i}  value={Number(item.id)}>{item.firstName} {item.lastName} {item.middleName}</option>
                                             ))}
                                         </Select>
                                     </FormControl>
@@ -145,6 +146,7 @@ const HodimlarTitle = () => {
                                     <FormControl>
                                         <FormLabel>Lavozimlar</FormLabel>
                                         <Select onChange={(e) => setDataValue({...dataValue , cid: e.target.value})}>
+                                            <option style={{color: 'gray'}} disabled selected className="option" value="">Lavozimlar</option>
                                             {dataItem.map((item , i) => (
                                                 <option key={i} value={Number(item.id)}>{item.name}</option>
                                             ))}

@@ -1,8 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-// import HomeBodyEn from '../homeBodyEn/homeBodyEn'
-// import HomeBodyKomp from '../homeBodyKop/homeBodyKomp'
 import HomeBodyAll from '../homeBodyAll/homeBodyAll'
 import axios from 'axios'
 import { API } from '../../api/api'
