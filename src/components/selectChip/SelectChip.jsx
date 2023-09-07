@@ -5,16 +5,18 @@ import axios from "axios";
 import { Spinner } from "@chakra-ui/react";
 
 function Selectmultidropdown() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [dataItem, setDataItem] = useState([]);
-  const item = [];
+  const all = []
   const [load, setLoad] = useState(false)
+
+  console.log(all);
+    for(let i = 0; i < dataItem.length; i++) {
+      all.push(dataItem[i].name)
+    }
+
   useEffect(() => {
     setLoad(true)
-    setTimeout(() => {
-      setLoad(false)
-      
-    }, 2000);
     axios
       .get(`${API}api/interests/all`, {
         headers: {
@@ -27,10 +29,7 @@ function Selectmultidropdown() {
         setDataItem(res.data);
         setLoad(false)
       });
-    for (let i = 0; i < dataItem.length; i++) {
-      item.push(dataItem[i].name);
-    }
-    setData(item);
+      
   }, []);
 
   return (
@@ -46,7 +45,7 @@ function Selectmultidropdown() {
                   loading={false}
                   isObject={false}
                   showCheckbox
-                  options={data}
+                  options={all}
                   onRemove={(e) => {
                     e;
                   }}

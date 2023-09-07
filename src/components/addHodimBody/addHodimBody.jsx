@@ -4,10 +4,13 @@ import { FormControl, FormLabel } from "@chakra-ui/react";
 import axios from "axios";
 import { API } from "../../api/api";
 import SelectChip from "../selectChip/SelectChip";
-
+import { InputMask, useMask } from "@react-input/mask";
 const AddHodimBody = ({ dataItem, setDataItem }) => {
   const [data, setData] = useState([]);
-
+  const inputRef = useMask({
+    mask: "+998 (__) ___-__-__",
+    replacement: { _: /\d/ },
+  });
   useEffect(() => {
     axios
       .get(`${API}api/education-level/all`, {
@@ -26,7 +29,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
   const [val, setVal] = useState("");
   const [image, setImage] = useState("");
   const [fileName, setFileName] = useState("Rasim mavjut emas!");
-  
+
   return (
     <Box width={"100%"} p={"30px"} bg={"white"} rounded={"10px"}>
       <Box
@@ -137,11 +140,10 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
                   setDataItem({ ...dataItem, e_level: e.target.value })
                 }
                 className="select"
-                value={val}
               >
                 {data.map((opt) => (
                   <option key={opt.id} selected={val}>
-                    {" "}
+                    {""}
                     {opt.name}{" "}
                   </option>
                 ))}
@@ -150,11 +152,15 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
 
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Asosiy)</FormLabel>
-              <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, phone1: e.target.value })
-                }
+              <input
                 placeholder="+998"
+                ref={inputRef}
+                style={{ outline: "none",
+                border: "1px solid #777",
+                width: "100%",
+                height: "41px",
+                borderRadius: "8px",
+                paddingLeft: "12px",}}
               />
             </FormControl>
           </Box>
@@ -168,11 +174,18 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
           >
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Qo’shimcha)</FormLabel>
-              <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, phone2: e.target.value })
-                }
-                placeholder="Tel..."
+              <input
+                style={{
+                  outline: "none",
+                  border: "1px solid #777",
+                  width: "100%",
+                  height: "41px",
+                  borderRadius: "8px",
+                  paddingLeft: "12px",
+                }}
+                type="text"
+                ref={inputRef}
+                placeholder="+998"
               />
             </FormControl>
 
