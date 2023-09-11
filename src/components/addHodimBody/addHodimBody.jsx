@@ -1,16 +1,26 @@
-import { Box, Button, Heading, Input, Spinner } from "@chakra-ui/react";
+import { Box, Button, Heading, Input, Spinner, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
 import axios from "axios";
 import { API } from "../../api/api";
 import SelectChip from "../selectChip/SelectChip";
 import { InputMask, useMask } from "@react-input/mask";
-const AddHodimBody = ({ dataItem, setDataItem }) => {
+const AddHodimBody = ({obj , setObj}) => {
   const [data, setData] = useState([]);
   const inputRef = useMask({
     mask: "+998 (__) ___-__-__",
     replacement: { _: /\d/ },
   });
+  const inputRef2 = useMask({
+    mask: "+998 (__) ___-__-__",
+    replacement: { _: /\d/ },
+  });
+
+  const handleFile = (e) => {
+    setObj({...obj, photo: e.target.files[0]})
+  }
+  
+
   useEffect(() => {
     axios
       .get(`${API}api/education-level/all`, {
@@ -24,11 +34,8 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
         setData(res.data);
       });
   }, []);
-  console.log(dataItem);
 
   const [val, setVal] = useState("");
-  const [image, setImage] = useState("");
-  const [fileName, setFileName] = useState("Rasim mavjut emas!");
 
   return (
     <Box width={"100%"} p={"30px"} bg={"white"} rounded={"10px"}>
@@ -47,9 +54,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Ismi</FormLabel>
               <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, firstname: e.target.value })
-                }
+                onChange={(e) => setObj({...obj, firstname: e.target.value})}
                 width={{ base: "100%", xl: "425px", "2xl": "500px" }}
                 placeholder="Ism..."
               />
@@ -58,9 +63,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Familiyasi</FormLabel>
               <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, lastname: e.target.value })
-                }
+               onChange={(e) => setObj({...obj, lastname: e.target.value})}
                 name="title"
                 width={{ base: "100%", xl: "500px" }}
                 placeholder="Familiya..."
@@ -78,9 +81,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Otasining ismi</FormLabel>
               <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, middleName: e.target.value })
-                }
+               onChange={(e) => setObj({...obj, middleName: e.target.value})}
                 placeholder="Otasini ismi..."
               />
             </FormControl>
@@ -88,9 +89,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Tug’ilgan sanasi</FormLabel>
               <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, birthday: e.target.value })
-                }
+                onChange={(e) => setObj({...obj, birthday: e.target.value})}
                 type={"date"}
               />
             </FormControl>
@@ -107,9 +106,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Passport Seriyasi</FormLabel>
               <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, identification: e.target.value })
-                }
+                onChange={(e) => setObj({...obj, identification: e.target.value})}
                 placeholder="Seriya..."
               />
             </FormControl>
@@ -117,9 +114,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Yashash mazili</FormLabel>
               <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, addres: e.target.value })
-                }
+                onChange={(e) => setObj({...obj, address: e.target.value})}
                 placeholder="Manzil..."
               />
             </FormControl>
@@ -136,15 +131,12 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Ma'lumoti</FormLabel>
               <select
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, e_level: e.target.value })
-                }
+                onChange={(e) => setObj({...obj, e_level: e.target.value})}
                 className="select"
               >
                 {data.map((opt) => (
-                  <option key={opt.id} selected={val}>
-                    {""}
-                    {opt.name}{" "}
+                  <option key={opt.id} value={opt.id} selected={val}>
+                    {opt.name}
                   </option>
                 ))}
               </select>
@@ -152,16 +144,21 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
 
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Asosiy)</FormLabel>
-              <input
-                placeholder="+998"
+                <input
                 ref={inputRef}
-                style={{ outline: "none",
-                border: "1px solid #777",
-                width: "100%",
-                height: "41px",
-                borderRadius: "8px",
-                paddingLeft: "12px",}}
-              />
+                  onChange={(e) => setObj({...obj, phone1: e.target.value})}
+                  style={{
+                    outline: "none",
+                    border: "1px solid #777",
+                    width: "100%",
+                    height: "41px",
+                    borderRadius: "8px",
+                    paddingLeft: "12px",
+                  }}
+                  type="text"
+                  // ref={inputRef2}
+                  placeholder="+998"
+                />
             </FormControl>
           </Box>
           {/* ma'lumot tugadi */}
@@ -175,6 +172,8 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Qo’shimcha)</FormLabel>
               <input
+              ref={inputRef2}
+                onChange={(e) => setObj({...obj, phone2: e.target.value})}
                 style={{
                   outline: "none",
                   border: "1px solid #777",
@@ -184,7 +183,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
                   paddingLeft: "12px",
                 }}
                 type="text"
-                ref={inputRef}
+                // ref={inputRef}
                 placeholder="+998"
               />
             </FormControl>
@@ -192,9 +191,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Telegram (username)</FormLabel>
               <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, telegram: e.target.value })
-                }
+                onChange={(e) => setObj({...obj, telegram: e.target.value})}
                 placeholder="Telegram..."
               />
             </FormControl>
@@ -209,52 +206,33 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Instagram (username)</FormLabel>
               <Input
-                onChange={(e) =>
-                  setDataItem({ ...dataItem, instagram: e.target.value })
-                }
+                onChange={(e) => setObj({...obj, instagram: e.target.value})}
                 width={{ base: "100%", xl: "48.5%", "2xl": "50%" }}
                 placeholder="Instagram..."
               />
             </FormControl>
           </Box>
 
-          <Box display={"flex"} flexDirection={"column"}>
+          {/* <Box display={"flex"} flexDirection={"column"}>
             <FormLabel>Qiziqishlari</FormLabel>
-            <SelectChip dataItem={dataItem} setDataItem={setDataItem} />
-          </Box>
+            <SelectChip  />
+          </Box> */}
         </Box>
 
         <Box mt={"20px"}>
-          <Box
-            width={{ base: "100%", "2xl": "400px" }}
-            overflow={"auto"}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"center"}
-            rounded={"10px"}
-            height={"300px"}
-            bg={"#F0F0FF"}
-          >
-            <form action="">
-              <input
-                className="input-field"
-                hidden
-                type="file"
-                accept="image/*"
-                onChange={({ target: { files } }) => {
-                  files[0] && setFileName(files[0].name);
-                  if (files) {
-                    setImage(URL.createObjectURL(files[0]));
-                  }
-                  (e) => setDataItem({ ...dataItem, photo: e.target.value });
-                }}
-              />
-              {image ? (
-                <img src={image} width={"380px"} alt={fileName} />
-              ) : (
-                <Heading fontSize={"32px"}>Hodim rasmi</Heading>
-              )}
+          <Box bg={'#F0F0FF'} rounded={'20px'} width={{xl: '400px' , md: '100%'}} height={'362px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}   >
+            <form action="" >
+              <input  className='input-field'  hidden type="file" accept='image/*' onChange={handleFile}/>
+              {obj.photo ? 
+              <img src={obj.photo[0]} width={'200px'} height={'200px'} alt={''} />
+              : (
+                <Box  cursor={'pointer'}  rounded={'10px'} p={'20px'}>
+                  <Text fontSize={'40px'} fontWeight={'bold'} >Hodim rasmi</Text>
+                </Box>
+              )
+            }
             </form>
+
           </Box>
           <Box>
             <Button

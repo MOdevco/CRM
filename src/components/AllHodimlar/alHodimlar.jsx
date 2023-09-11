@@ -14,6 +14,7 @@ import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import axios from 'axios'
 import { API } from '../../api/api'
 import HodimImg from '../hodimImg/hodimImg'
+import { Link } from 'react-router-dom'
 
 const AllHodimlar = ({setCount}) => {
   const [total , setTotal] = useState([])
@@ -76,7 +77,11 @@ const AllHodimlar = ({setCount}) => {
                           <Th fontSize={'15px'} color={'gray.500'}>{hodim.physicalFace.personalIdentification}</Th>
                           <Th fontSize={'15px'} color={'gray.500'}>{hodim.physicalFace.primaryPhone}</Th>
                           <Th color={'gray.500'}><HodimImg img={hodim.physicalFace.photo} /></Th>
-                          <Th color={'gray.500'}><CiReceipt fontSize={'30px'} color={'#7364FF'} /></Th>
+                          <Th color={'gray.500'}>
+                            <Link to={`/updateXodim/${hodim.id}`}>
+                              <CiReceipt  cursor={'pointer'} fontSize={'30px'} color={'#7364FF'} />
+                            </Link>
+                          </Th>
 
                       </Tr>
                   ))}

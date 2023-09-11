@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Input, Select, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Heading, Image, Input, Select, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { useToast } from '@chakra-ui/react'
@@ -15,6 +15,7 @@ import {
 import { MdDelete } from 'react-icons/md'
 import axios from 'axios'
 import { API } from '../../api/api'
+import { dateIcon } from '../../assets'
 
 const HomeTitle = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -164,12 +165,18 @@ const HomeTitle = () => {
                 <FormControl display={'flex'} width={'100%'} flexWrap={'wrap'} gap={'10px'} justifyContent={'space-between'}>
                   <Box>
                     <FormLabel color={'#A6A6A6'}>Ochilgan sana</FormLabel>
-                    <Input  width={'400px'} type="datetime-local"/>
+                    <Box display={'flex'} border={'1px'} rounded={'10px'} borderColor={'gray.300'} alignItems={'center'}>
+                      <input type="date"  className='outVal'/>
+                      <Image width={'40px'} src={dateIcon}></Image>
+                    </Box>
                   </Box>
 
                   <Box>
                     <FormLabel color={'#A6A6A6'}>Yopilish sanasi</FormLabel>
-                    <Input  width={'400px'} type="datetime-local"/>
+                    <Box display={'flex'} border={'1px'} rounded={'10px'} borderColor={'gray.300'} alignItems={'center'}>
+                      <input type="date"  className='outVal'/>
+                      <Image width={'40px'} src={dateIcon}></Image>
+                    </Box>
                   </Box>
                 </FormControl>
 

@@ -31,7 +31,7 @@ const HomeBodyDasturlash = ({id}) => {
       {!loading && <Box display={'flex'} gap={'30px'}  flexWrap={'wrap'}>
 
         {data.map((item , i) => (
-          <DevCard key={i} title={item.subject.name} paragraph={item.description} img={item.imageStore} theme1={'Marketing'} theme2={'Sales'} date={'25 Sep, 2022'} viwe={'04'} mess={'08'} likes={'24'}/>
+          <DevCard key={i} title={item.subSubject.name} paragraph={item.description} img={item.imageStore} theme1={'Marketing'} theme2={'Sales'} date={'25 Sep, 2022'} viwe={'04'} mess={'08'} likes={'24'}/>
 
         ))}
           
