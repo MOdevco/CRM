@@ -1,16 +1,35 @@
-import { Box, Button, Heading, Input, Spinner } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Img,
+  Input,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
 import axios from "axios";
 import { API } from "../../api/api";
-import SelectChip from "../selectChip/SelectChip";
 import { InputMask, useMask } from "@react-input/mask";
+
 const AddHodimBody = ({ dataItem, setDataItem }) => {
   const [data, setData] = useState([]);
+
+  const handelFile = (e) =>{
+    setDataItem({...dataItem, photo: e.target.files[0]})
+  }
+
   const inputRef = useMask({
     mask: "+998 (__) ___-__-__",
     replacement: { _: /\d/ },
   });
+
+  const inputReef = useMask({
+    mask: "+998 (__) ___-__-__",
+    replacement: { _: /\d/ },
+  });
+
   useEffect(() => {
     axios
       .get(`${API}api/education-level/all`, {
@@ -24,7 +43,6 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
         setData(res.data);
       });
   }, []);
-  console.log(dataItem);
 
   const [val, setVal] = useState("");
   const [image, setImage] = useState("");
@@ -87,11 +105,11 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
 
             <FormControl isRequired>
               <FormLabel>Tug’ilgan sanasi</FormLabel>
-              <Input
+              <Input 
+                datatype="local"
                 onChange={(e) =>
                   setDataItem({ ...dataItem, birthday: e.target.value })
                 }
-                type={"date"}
               />
             </FormControl>
           </Box>
@@ -118,7 +136,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
               <FormLabel>Yashash mazili</FormLabel>
               <Input
                 onChange={(e) =>
-                  setDataItem({ ...dataItem, addres: e.target.value })
+                  setDataItem({ ...dataItem, address: e.target.value })
                 }
                 placeholder="Manzil..."
               />
@@ -142,7 +160,7 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
                 className="select"
               >
                 {data.map((opt) => (
-                  <option key={opt.id} selected={val}>
+                  <option key={opt.id} value={opt.id} selected={val}>
                     {""}
                     {opt.name}{" "}
                   </option>
@@ -153,14 +171,19 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Asosiy)</FormLabel>
               <input
+                onChange={(e) => {
+                  setDataItem({ ...dataItem, phone1: e.target.value });
+                }}
                 placeholder="+998"
-                ref={inputRef}
-                style={{ outline: "none",
-                border: "1px solid #777",
-                width: "100%",
-                height: "41px",
-                borderRadius: "8px",
-                paddingLeft: "12px",}}
+                ref={inputReef}
+                style={{
+                  outline: "none",
+                  border: "1px solid #777",
+                  width: "100%",
+                  height: "41px",
+                  borderRadius: "8px",
+                  paddingLeft: "12px",
+                }}
               />
             </FormControl>
           </Box>
@@ -175,6 +198,9 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Qo’shimcha)</FormLabel>
               <input
+                onChange={(e) => {
+                  setDataItem({ ...dataItem, phone2: e.target.value });
+                }}
                 style={{
                   outline: "none",
                   border: "1px solid #777",
@@ -220,45 +246,28 @@ const AddHodimBody = ({ dataItem, setDataItem }) => {
 
           <Box display={"flex"} flexDirection={"column"}>
             <FormLabel>Qiziqishlari</FormLabel>
-            <SelectChip dataItem={dataItem} setDataItem={setDataItem} />
+            {/* <SelectChip dataItem={dataItem} setDataItem={setDataItem} /> */}
           </Box>
         </Box>
 
         <Box mt={"20px"}>
-          <Box
-            width={{ base: "100%", "2xl": "400px" }}
-            overflow={"auto"}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"center"}
-            rounded={"10px"}
-            height={"300px"}
-            bg={"#F0F0FF"}
-          >
-            <form action="">
-              <input
-                className="input-field"
-                hidden
-                type="file"
-                accept="image/*"
-                onChange={({ target: { files } }) => {
-                  files[0] && setFileName(files[0].name);
-                  if (files) {
-                    setImage(URL.createObjectURL(files[0]));
+        <Box border={'2px'} width={'100%'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} height={'300px'}  borderColor={'#5D5FEF'} borderStyle={'dashed'}>
+                  <form action="" >
+                    <input  className='input-field'  hidden type="file" accept='image/*' onChange={handelFile}/>
+                    {dataItem.photo ? 
+                    <img src={dataItem.photo[0]} width={'200px'} height={'200px'} alt={''} />
+                    : (
+                      <Box border={'1px'} cursor={'pointer'} borderColor={'#CCD3DB'} rounded={'10px'} p={'20px'}>
+                        <Text fontSize={'18px'} color={'#726BEA'}>Rasim Tanlang</Text>
+                      </Box>
+                    )
                   }
-                  (e) => setDataItem({ ...dataItem, photo: e.target.value });
-                }}
-              />
-              {image ? (
-                <img src={image} width={"380px"} alt={fileName} />
-              ) : (
-                <Heading fontSize={"32px"}>Hodim rasmi</Heading>
-              )}
-            </form>
-          </Box>
+                  </form>
+
+                </Box>
           <Box>
             <Button
-              onClick={() => document.querySelector(".input-field").click()}
+              onClick={() => document.querySelector('.input-field').click()}
               mt={"20px"}
               bg={"#10B981"}
               color={"#fff"}
