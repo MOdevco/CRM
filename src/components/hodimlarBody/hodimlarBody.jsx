@@ -2,21 +2,15 @@ import { AddIcon } from '@chakra-ui/icons'
 import { Box, Button } from '@chakra-ui/react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import AllHodimlar from '../AllHodimlar/alHodimlar'
-import HodimHelpTech from '../hodimHelpTech/hodimHelpTech'
-import HodimlarAdmin from '../hodimlarAdmin/hodimlarAdmin'
-import Ustozlar from '../hodimlarUstozlar/ustozlar'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API } from '../../api/api'
 import Direktor from '../direktor/direktor'
-import DOrinbosar from '../dOrincosar/dOrinbosar'
-import HodimQorovul from '../hodimQorovul/hodimQorovul'
-import HodimFarosh from '../hodimFarosh/hodimFarosh'
 const HodimlarBody = () => {
    const [data , setData] = useState([])
    const [count , setCount] = useState([])
-
-  
+   console.log(count)
+   const [id , setId] = useState([])
 
    useEffect(() => {
     axios.get(`${API}api/physical-stuff/categories` , {
@@ -27,6 +21,7 @@ const HodimlarBody = () => {
         }
     }).then((res) => {
         setData(res.data)
+        setId(res.data)
     })
    } , [])
 
@@ -53,27 +48,11 @@ const HodimlarBody = () => {
                     <TabPanel >
                         <AllHodimlar  setCount={setCount} />
                     </TabPanel>
-                    <TabPanel>
-                        <Direktor/>
-                    </TabPanel>
-                    <TabPanel>
-                        <DOrinbosar />
-                    </TabPanel>
-                    <TabPanel>
-                        <Ustozlar />
-                    </TabPanel>
-                    <TabPanel>
-                        <HodimHelpTech />
-                    </TabPanel>
-                    <TabPanel>
-                        <HodimlarAdmin />
-                    </TabPanel>
-                    <TabPanel>
-                        <HodimQorovul />
-                    </TabPanel>
-                    <TabPanel>
-                        <HodimFarosh />
-                    </TabPanel>
+                    {id.map((item , i) => (
+                        <TabPanel key={i}>
+                            <Direktor id={item.category.id} name={item.category.name}/>
+                        </TabPanel>
+                    ))}
                 </TabPanels>
             </Tabs>
         </Box>

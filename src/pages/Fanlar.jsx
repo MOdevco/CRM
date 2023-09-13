@@ -7,7 +7,7 @@ import FanlarBody from "../components/fanlarBody/FanlarBody"
 const Fanlar = () => {
   return (
     <div>
-      <Box width={"100%"} minHeight={"100vh"}>
+      <Box width={"100%"} height={'100%'}>
         <Flex>
           <Box
             pt={"100px"}

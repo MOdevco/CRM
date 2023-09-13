@@ -1,5 +1,5 @@
 import { AddIcon, SearchIcon } from "@chakra-ui/icons"
-import { Box, Button, FormControl, FormLabel, Heading, Input, useDisclosure  } from "@chakra-ui/react"
+import { Box, Button, FormControl, FormLabel, Heading, Image, Input, useDisclosure  } from "@chakra-ui/react"
 import {
     Modal,
     ModalOverlay,
@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { API } from "../../api/api"
 import { useToast } from '@chakra-ui/react'
-
+import { dateIcon } from "../../assets"
 
 const HodimlarTitle = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -26,7 +26,7 @@ const HodimlarTitle = () => {
     const [dataItem , setDataItem] = useState([])
     const [dataValue , setDataValue] = useState({cid: '' , fid: '' , start_date: ''})
     const toast = useToast()
-    // console.log(dataValue)
+
     const handleSizeClick = (newSize) => {
         setSize(newSize)
         onOpen()
@@ -79,6 +79,7 @@ const HodimlarTitle = () => {
                     isClosable: true,
                 })
             } 
+            window.location.reload(true);
         }).catch((err) => {
             // console.log(err.response.status)
             // console.log(err.response.data.message)
@@ -135,9 +136,10 @@ const HodimlarTitle = () => {
 
                                     <FormControl>
                                         <FormLabel>Jismoniy shahslar</FormLabel>
-                                        <Select onChange={(e) => setDataValue({...dataValue , fid: e.target.value})}>
+                                        <Select  onChange={(e) => setDataValue({...dataValue , fid: e.target.value})}>
+                                            <option selected disabled className="option" value="">Jismoniy shahslar</option>
                                             {data.map((item , i) => (
-                                                <option key={i} value={Number(item.id)}>{item.firstName} {item.lastName} {item.middleName}</option>
+                                                <option key={i}  value={Number(item.id)}>{item.firstName} {item.lastName} {item.middleName}</option>
                                             ))}
                                         </Select>
                                     </FormControl>
@@ -145,6 +147,7 @@ const HodimlarTitle = () => {
                                     <FormControl>
                                         <FormLabel>Lavozimlar</FormLabel>
                                         <Select onChange={(e) => setDataValue({...dataValue , cid: e.target.value})}>
+                                            <option style={{color: 'gray'}} disabled selected className="option" value="">Lavozimlar</option>
                                             {dataItem.map((item , i) => (
                                                 <option key={i} value={Number(item.id)}>{item.name}</option>
                                             ))}
@@ -153,7 +156,11 @@ const HodimlarTitle = () => {
 
                                     <FormControl mt={4}>
                                         <FormLabel>Sanadan boshlab</FormLabel>
-                                        <Input type={'date'} onChange={(e) => setDataValue({...dataValue , start_date: e.target.value})} />
+                                        <Box display={'flex'} rounded={'10px'} alignItems={'center'} border={'1px'} borderColor={'gray.300'}>
+                                            {/* <Input border={'none'} className={'dateVal'} outline={0}  type={'date'}   /> */}
+                                            <input type="date" className="dateVal" onChange={(e) => setDataValue({...dataValue , start_date: e.target.value})} />
+                                            <Image className="imgCheck" bg={'gray.400'} rounded={'10px'} width={'40px'} src={dateIcon}></Image>
+                                        </Box>
                                     </FormControl>
 
                                     <FormControl mt={4}>

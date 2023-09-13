@@ -1,17 +1,24 @@
-import { Box, Button, Heading, Input, Spinner, Text } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { FormControl, FormLabel } from "@chakra-ui/react";
-import axios from "axios";
-import { API } from "../../api/api";
-import { InputMask, useMask } from "@react-input/mask";
-const AddHodimBody = ({obj , setObj}) => {
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+} from "@chakra-ui/react";
+import { useMask } from "@react-input/mask";
+import React from "react";
+import { useState } from "react";
+
+function UpDateXodimBody() {
   const [data, setData] = useState([]);
 
-  const handelFile = (e) =>{
-    setDataItem({...dataItem, photo: e.target.files[0]})
-  }
+//   const handelFile = (e) => {
+//     setDataItem({ ...dataItem, photo: e.target.files[0] });
+//   };
 
-  const inputRef = useMask({
+  const inputRef = useMask
+  ({
     mask: "+998 (__) ___-__-__",
     replacement: { _: /\d/ },
   });
@@ -20,33 +27,18 @@ const AddHodimBody = ({obj , setObj}) => {
     replacement: { _: /\d/ },
   });
 
+  const [obj,setObj] = useState([])
+
   const handleFile = (e) => {
-    setObj({...obj, photo: e.target.files[0]})
-  }
-  
-
-  useEffect(() => {
-    axios
-      .get(`${API}api/education-level/all`, {
-        headers: {
-          "ngrok-skip-browser-warning": true,
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setData(res.data);
-      });
-  }, []);
-
-  const [val, setVal] = useState("");
+    setObj({ ...obj, photo: e.target.files[0] });
+  };
 
   return (
     <Box width={"100%"} p={"30px"} bg={"white"} rounded={"10px"}>
       <Box
         display={"flex"}
         flexDirection={{ base: "column", xl: "column", "2xl": "row" }}
-        justifyContent={"space-evenly"}
+        justifyContent={"space-between"}
       >
         <Box display={"flex"} flexDirection={"column"} gap={"20px"}>
           {/* ism familiya boshlandi */}
@@ -58,7 +50,7 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Ismi</FormLabel>
               <Input
-                onChange={(e) => setObj({...obj, firstname: e.target.value})}
+                onChange={(e) => setObj({ ...obj, firstname: e.target.value })}
                 width={{ base: "100%", xl: "425px", "2xl": "500px" }}
                 placeholder="Ism..."
               />
@@ -67,7 +59,7 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Familiyasi</FormLabel>
               <Input
-               onChange={(e) => setObj({...obj, lastname: e.target.value})}
+                onChange={(e) => setObj({ ...obj, lastname: e.target.value })}
                 name="title"
                 width={{ base: "100%", xl: "500px" }}
                 placeholder="Familiya..."
@@ -85,7 +77,7 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Otasining ismi</FormLabel>
               <Input
-               onChange={(e) => setObj({...obj, middleName: e.target.value})}
+                onChange={(e) => setObj({ ...obj, middleName: e.target.value })}
                 placeholder="Otasini ismi..."
               />
             </FormControl>
@@ -93,7 +85,7 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Tug’ilgan sanasi</FormLabel>
               <Input
-                onChange={(e) => setObj({...obj, birthday: e.target.value})}
+                onChange={(e) => setObj({ ...obj, birthday: e.target.value })}
                 type={"date"}
               />
             </FormControl>
@@ -110,7 +102,9 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Passport Seriyasi</FormLabel>
               <Input
-                onChange={(e) => setObj({...obj, identification: e.target.value})}
+                onChange={(e) =>
+                  setObj({ ...obj, identification: e.target.value })
+                }
                 placeholder="Seriya..."
               />
             </FormControl>
@@ -118,7 +112,7 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Yashash mazili</FormLabel>
               <Input
-                onChange={(e) => setObj({...obj, address: e.target.value})}
+                onChange={(e) => setObj({ ...obj, address: e.target.value })}
                 placeholder="Manzil..."
               />
             </FormControl>
@@ -135,7 +129,7 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Ma'lumoti</FormLabel>
               <select
-                onChange={(e) => setObj({...obj, e_level: e.target.value})}
+                onChange={(e) => setObj({ ...obj, e_level: e.target.value })}
                 className="select"
               >
                 {data.map((opt) => (
@@ -148,21 +142,21 @@ const AddHodimBody = ({obj , setObj}) => {
 
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Asosiy)</FormLabel>
-                <input
+              <input
                 ref={inputRef}
-                  onChange={(e) => setObj({...obj, phone1: e.target.value})}
-                  style={{
-                    outline: "none",
-                    border: "1px solid #777",
-                    width: "100%",
-                    height: "41px",
-                    borderRadius: "8px",
-                    paddingLeft: "12px",
-                  }}
-                  type="text"
-                  // ref={inputRef2}
-                  placeholder="+998"
-                />
+                onChange={(e) => setObj({ ...obj, phone1: e.target.value })}
+                style={{
+                  outline: "none",
+                  border: "1px solid #777",
+                  width: "100%",
+                  height: "41px",
+                  borderRadius: "8px",
+                  paddingLeft: "12px",
+                }}
+                type="text"
+                // ref={inputRef2}
+                placeholder="+998"
+              />
             </FormControl>
           </Box>
           {/* ma'lumot tugadi */}
@@ -176,8 +170,8 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Qo’shimcha)</FormLabel>
               <input
-              ref={inputRef2}
-                onChange={(e) => setObj({...obj, phone2: e.target.value})}
+                ref={inputRef2}
+                onChange={(e) => setObj({ ...obj, phone2: e.target.value })}
                 style={{
                   outline: "none",
                   border: "1px solid #777",
@@ -195,7 +189,7 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Telegram (username)</FormLabel>
               <Input
-                onChange={(e) => setObj({...obj, telegram: e.target.value})}
+                onChange={(e) => setObj({ ...obj, telegram: e.target.value })}
                 placeholder="Telegram..."
               />
             </FormControl>
@@ -210,7 +204,7 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Instagram (username)</FormLabel>
               <Input
-                onChange={(e) => setObj({...obj, instagram: e.target.value})}
+                onChange={(e) => setObj({ ...obj, instagram: e.target.value })}
                 width={{ base: "100%", xl: "48.5%", "2xl": "50%" }}
                 placeholder="Instagram..."
               />
@@ -218,29 +212,49 @@ const AddHodimBody = ({obj , setObj}) => {
           </Box>
 
           {/* <Box display={"flex"} flexDirection={"column"}>
-            <FormLabel>Qiziqishlari</FormLabel>
-            <SelectChip  />
-          </Box> */}
+                <FormLabel>Qiziqishlari</FormLabel>
+                <SelectChip  />
+              </Box> */}
         </Box>
 
         <Box mt={"20px"}>
-          <Box bg={'#F0F0FF'} rounded={'20px'} width={{xl: '400px' , md: '100%'}} height={'362px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}   >
-            <form action="" >
-              <input  className='input-field'  hidden type="file" accept='image/*' onChange={handleFile}/>
-              {obj.photo ? 
-              <img src={obj.photo[0]} width={'200px'} height={'200px'} alt={''} />
-              : (
-                <Box  cursor={'pointer'}  rounded={'10px'} p={'20px'}>
-                  <Text fontSize={'40px'} fontWeight={'bold'} >Hodim rasmi</Text>
+          <Box
+            bg={"#F0F0FF"}
+            rounded={"20px"}
+            width={{ xl: "400px", md: "100%" }}
+            height={"362px"}
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <form action="">
+              <input
+                className="input-field"
+                hidden
+                type="file"
+                accept="image/*"
+                onChange={handleFile}
+              />
+              {obj.photo ? (
+                <img
+                  src={obj.photo[0]}
+                  width={"200px"}
+                  height={"200px"}
+                  alt={""}
+                />
+              ) : (
+                <Box cursor={"pointer"} rounded={"10px"} p={"20px"}>
+                  <Text fontSize={"40px"} fontWeight={"bold"}>
+                    Hodim rasmi
+                  </Text>
                 </Box>
-              )
-            }
+              )}
             </form>
-
           </Box>
           <Box>
             <Button
-              onClick={() => document.querySelector('.input-field').click()}
+              onClick={() => document.querySelector(".input-field").click()}
               mt={"20px"}
               bg={"#10B981"}
               color={"#fff"}
@@ -255,6 +269,6 @@ const AddHodimBody = ({obj , setObj}) => {
       </Box>
     </Box>
   );
-};
+}
 
-export default AddHodimBody;
+export default UpDateXodimBody;

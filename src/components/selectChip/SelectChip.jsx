@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import Multiselect from "multiselect-react-dropdown";
 import { API } from "../../api/api";
 import axios from "axios";
+// import { Spinner } from "@chakra-ui/react";
 
-function Selectmultidropdown( {dataItem, setDataItem} ) {
+function Selectmultidropdown() {
   const [data, setData] = useState([]);
-  const all = []
-  const [load, setLoad] = useState(false)
-  
-    for(let i = 0; i < data.length; i++) {
-      all.push(data[i])
-    }
+ 
+
   useEffect(() => {
-    setLoad(true)
+    // setLoad(true)
     axios
       .get(`${API}api/interests/all`, {
         headers: {
@@ -23,7 +20,7 @@ function Selectmultidropdown( {dataItem, setDataItem} ) {
       })
       .then((res) => {
         setData(res.data);
-        setLoad(false)
+        // setLoad(false)
       });
       
   }, []);
@@ -37,22 +34,19 @@ function Selectmultidropdown( {dataItem, setDataItem} ) {
               <label className="form-label"></label>
 
               <div className="text-dark"> 
+              
                 <Multiselect
-                 loading={false}
-                 isObject={true}
-                 showCheckbox
-                 options={all}
-                 displayValue="name"
-                 onRemove={(e) => {
-                   e;
-                 }}
-                 onSelect={(e) => {
-                   setDataItem(e)
-                 }
+                  loading={false}
+                  isObject={true}
+                  showCheckbox
+                  displayValue="name"
+                  onRemove={(e) => {
+                    e;
+                  }}
                  
+                  
 
-                 }
-                />
+                ></Multiselect> 
               </div>
             </div>
           </form>
