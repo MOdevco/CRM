@@ -13,18 +13,6 @@ const YangiHodim = () => {
   const toast = useToast()
   const [dataItem , setDataItem] = useState({ address: '' , birthday: '' , e_level: '' , firstname: '' , identification: '' , instagram: '' , lastname: '' , middleName: '' , phone1: '' , phone2: '' , photo: '' ,telegram: ''})
 
-  // const [upDate , setDate] = useState({id: id , address: '' , birthday: '' , e_level: '' , firstname: '' , identification: '' , instagram: '' , lastname: '' , middleName: '' , phone1: '' , phone2: '' , photo: '' ,telegram: ''})
-  // console.log(upDate)
-
-
-  useEffect(() => {
-    axios.get(`${API}api/physical-stuff/all`)
-    .then((res) => {
-      // setDate({...upDate, address: res.data.address , birthday: res.data.birthday , e_level: res.data.e_level , firstname: res.data.firstname, identification: res.data.identification , instagram: res.data.instagram , lastname: res.data.lastname, middleName: res.data.middleName , phone1: res.data.phone1 , phone2: res.data.phone2 , photo: res.data.photo , telegram: res.data.telegram})
-      console.log(res.data)
-    })
-  } , [])
-
  
 
   const phone1 = dataItem.phone1

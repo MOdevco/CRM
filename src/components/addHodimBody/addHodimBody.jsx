@@ -5,6 +5,7 @@ import axios from "axios";
 import { API } from "../../api/api";
 import SelectChip from "../selectChip/SelectChip";
 import { InputMask, useMask } from "@react-input/mask";
+import { useParams } from "react-router-dom";
 const AddHodimBody = ({obj , setObj}) => {
   const [data, setData] = useState([]);
   const inputRef = useMask({
@@ -19,6 +20,40 @@ const AddHodimBody = ({obj , setObj}) => {
   const handleFile = (e) => {
     setObj({...obj, photo: e.target.files[0]})
   }
+
+  const {id} = useParams()
+  const [upDate , setDate] = useState({id: id , address: '' , birthday: '' , e_level: '' , firstname: '' , identification: '' , instagram: '' , lastname: '' , middleName: '' , phone1: '' , phone2: '' , photo: '' ,telegram: ''})
+  useEffect(() => {
+    axios
+      .get(`${API}api/physical-face/single?pId=${id}`, {
+        headers: {
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const interes = res.data.interests
+        const pre = []
+        for(let i = 0; i < interes.length; i++) {
+          pre.push(interes[i].name)
+        }
+        setDate({...upDate, address: res.data.address ,
+          birthday: res.data.birthday , 
+          e_level: res.data.educationLevel.name , 
+          firstname: res.data.firstName , 
+          identification: res.data.personalIdentification, 
+          instagram: res.data.instagramUsername, 
+          lastname: res.data.lastName, 
+          middleName: res.data.middleName, 
+          interests: pre,
+          phone1: res.data.primaryPhone, 
+          phone2: res.data.secondaryPhone , 
+          photo: res.data.photo, 
+          telegram: res.data.telegramUsername})
+      });
+  }, [])
+
   
 
   useEffect(() => {
@@ -54,6 +89,7 @@ const AddHodimBody = ({obj , setObj}) => {
             <FormControl isRequired>
               <FormLabel>Ismi</FormLabel>
               <Input
+                value={upDate.firstname}
                 onChange={(e) => setObj({...obj, firstname: e.target.value})}
                 width={{ base: "100%", xl: "425px", "2xl": "500px" }}
                 placeholder="Ism..."
@@ -62,7 +98,7 @@ const AddHodimBody = ({obj , setObj}) => {
 
             <FormControl isRequired>
               <FormLabel>Familiyasi</FormLabel>
-              <Input
+              <Input value={upDate.lastname}
                onChange={(e) => setObj({...obj, lastname: e.target.value})}
                 name="title"
                 width={{ base: "100%", xl: "500px" }}
@@ -80,7 +116,7 @@ const AddHodimBody = ({obj , setObj}) => {
           >
             <FormControl isRequired>
               <FormLabel>Otasining ismi</FormLabel>
-              <Input
+              <Input value={upDate.middleName}
                onChange={(e) => setObj({...obj, middleName: e.target.value})}
                 placeholder="Otasini ismi..."
               />
@@ -88,7 +124,7 @@ const AddHodimBody = ({obj , setObj}) => {
 
             <FormControl isRequired>
               <FormLabel>Tug’ilgan sanasi</FormLabel>
-              <Input
+              <Input value={upDate.birthday}
                 onChange={(e) => setObj({...obj, birthday: e.target.value})}
                 type={"date"}
               />
@@ -105,15 +141,15 @@ const AddHodimBody = ({obj , setObj}) => {
           >
             <FormControl isRequired>
               <FormLabel>Passport Seriyasi</FormLabel>
-              <Input
+              <Input value={upDate.identification}
                 onChange={(e) => setObj({...obj, identification: e.target.value})}
                 placeholder="Seriya..."
               />
             </FormControl>
 
-            <FormControl isRequired>
+            <FormControl >
               <FormLabel>Yashash mazili</FormLabel>
-              <Input
+              <Input value={upDate.address}
                 onChange={(e) => setObj({...obj, address: e.target.value})}
                 placeholder="Manzil..."
               />
@@ -128,7 +164,7 @@ const AddHodimBody = ({obj , setObj}) => {
             flexDirection={{ base: "column", xl: "row" }}
             gap={"30px"}
           >
-            <FormControl isRequired>
+            <FormControl >
               <FormLabel>Ma'lumoti</FormLabel>
               <select
                 onChange={(e) => setObj({...obj, e_level: e.target.value})}
@@ -142,10 +178,10 @@ const AddHodimBody = ({obj , setObj}) => {
               </select>
             </FormControl>
 
-            <FormControl isRequired>
+            <FormControl >
               <FormLabel>Telefon raqami (Asosiy)</FormLabel>
-                <input
-                ref={inputRef}
+                <input value={upDate.phone1}
+                  ref={inputRef}
                   onChange={(e) => setObj({...obj, phone1: e.target.value})}
                   style={{
                     outline: "none",
@@ -171,7 +207,7 @@ const AddHodimBody = ({obj , setObj}) => {
           >
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Qo’shimcha)</FormLabel>
-              <input
+              <input value={upDate.phone2}
               ref={inputRef2}
                 onChange={(e) => setObj({...obj, phone2: e.target.value})}
                 style={{
@@ -190,7 +226,7 @@ const AddHodimBody = ({obj , setObj}) => {
 
             <FormControl isRequired>
               <FormLabel>Telegram (username)</FormLabel>
-              <Input
+              <Input value={upDate.telegram}
                 onChange={(e) => setObj({...obj, telegram: e.target.value})}
                 placeholder="Telegram..."
               />
@@ -205,7 +241,7 @@ const AddHodimBody = ({obj , setObj}) => {
           >
             <FormControl isRequired>
               <FormLabel>Instagram (username)</FormLabel>
-              <Input
+              <Input value={upDate.instagram}
                 onChange={(e) => setObj({...obj, instagram: e.target.value})}
                 width={{ base: "100%", xl: "48.5%", "2xl": "50%" }}
                 placeholder="Instagram..."
@@ -222,9 +258,9 @@ const AddHodimBody = ({obj , setObj}) => {
         <Box mt={"20px"}>
           <Box bg={'#F0F0FF'} rounded={'20px'} width={{xl: '400px' , md: '100%'}} height={'362px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}   >
             <form action="" >
-              <input  className='input-field'  hidden type="file" accept='image/*' onChange={handleFile}/>
-              {obj.photo ? 
-              <img src={obj.photo[0]} width={'200px'} height={'200px'} alt={''} />
+              <input  className='input-field'   hidden type="file" accept='image/*' onChange={handleFile}/>
+              {upDate.photo ? 
+              <img src={upDate.photo} width={'200px'} height={'200px'} alt={''} />
               : (
                 <Box  cursor={'pointer'}  rounded={'10px'} p={'20px'}>
                   <Text fontSize={'40px'} fontWeight={'bold'} >Hodim rasmi</Text>
