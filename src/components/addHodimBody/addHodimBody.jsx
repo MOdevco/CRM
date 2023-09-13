@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
 import axios from "axios";
 import { API } from "../../api/api";
-import SelectChip from "../selectChip/SelectChip";
 import { InputMask, useMask } from "@react-input/mask";
 import { useParams } from "react-router-dom";
 const AddHodimBody = ({obj , setObj}) => {
   const [data, setData] = useState([]);
+
+  const handelFile = (e) =>{
+    setDataItem({...dataItem, photo: e.target.files[0]})
+  }
+
   const inputRef = useMask({
     mask: "+998 (__) ___-__-__",
     replacement: { _: /\d/ },
@@ -272,7 +276,7 @@ const AddHodimBody = ({obj , setObj}) => {
           </Box>
           <Box>
             <Button
-              onClick={() => document.querySelector(".input-field").click()}
+              onClick={() => document.querySelector('.input-field').click()}
               mt={"20px"}
               bg={"#10B981"}
               color={"#fff"}

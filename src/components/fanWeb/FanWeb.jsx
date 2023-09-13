@@ -5,9 +5,9 @@ import { fan } from "../../assets";
 function FanWeb() {
   return (
     <div>
-      <Box>
+      <Box overflow={'auto'}>
         <Box>
-          <Box display={"flex"} flexDirection={"column"}>
+          <Box display={"flex"}  flexDirection={"column"} >
             <Text
               pl={"42px"}
               pt={"27px"}
@@ -269,7 +269,7 @@ function FanWeb() {
                 </Text>
               </Box>
             </Box>
-            <Box
+            {/* <Box
               display={"flex"}
               alignItems={"center"}
               gap={"145px"}
@@ -310,7 +310,7 @@ function FanWeb() {
                   O’qituvchilar soni: 20
                 </Text>
               </Box>
-            </Box>
+            </Box> */}
           </Box>
         </Box>
       </Box>

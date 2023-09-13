@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const FanTopLink = () => {
   return (
-    <Box display={"flex"} gap={"10px"} mt={'10px'}>
+    <Box display={"flex"} gap={"10px"} mt={'10px'} >
       <NavLink>
         <Text
           display={"flex"}

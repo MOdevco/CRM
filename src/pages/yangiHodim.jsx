@@ -41,9 +41,38 @@ const YangiHodim = () => {
 
 
 
+ 
+
+  console.log(dataItem);
+  
+ const val2 = dataItem
+
+ const val = []
+
+  for(let i = 0; i < dataItem.length; i++){
+
+  }
+  
+  for(let i = 0; i < val2.length; i++) {
+    val.push(val2[i].id) 
+  }
+
+  const correctPhone = (phone) => {
+    const stringPhone = String(phone)
+    const phoneParts =  stringPhone.split("-")
+    const head = phoneParts[0]
+    const first  = phoneParts[1]
+    const second  = phoneParts[2]
+    const hed1 = String(head).split(' ')
+    const hed2 = String(hed1[0]).slice(1,4)
+  
+    const hed3 = String(hed1[1]).slice(1,3)
+    const hed4 = hed1[2]
+
+    const tel = hed2+hed3+hed4+first+second
+    return tel
+  }
   const handelPost = () => {
-
-
     // const phone1 = correctPhone(val2.phone1)
     // const phone2 = correctPhone(val2.phone2)
     const formData = new FormData()
@@ -89,7 +118,9 @@ const YangiHodim = () => {
             isClosable: true,
           })
         });
-  };
+        console.log(err);
+      };
+  
 
   return (
     <Box width={"100%"} overflow={"auto"} minHeight={"100vh"}>
@@ -110,6 +141,6 @@ const YangiHodim = () => {
       </Box>
     </Box>
   );
-};
+ };
 
 export default YangiHodim;
