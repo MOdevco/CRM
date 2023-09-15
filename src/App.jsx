@@ -57,11 +57,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/hodimlar" element={<Hodimlar />}></Route>
-          <Route path="/yangiHodim/:id" element={<YangiHodim />}></Route>
+          <Route path="/yangiHodim" element={<YangiHodim />}></Route>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/Fanlar" element={<Fanlar />}></Route>
-          <Route path="/UpdateXodim" element={<UpdateXodim />}></Route>
+          <Route path="/UpdateXodim/:id" element={<UpdateXodim />}></Route>
         </Routes>
       </Flex>
     </Box>

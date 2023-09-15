@@ -24,7 +24,6 @@ const Fanlar = () => {
           </Box>
         </Flex>
       </Box>
-      <Box></Box>
     </div>
   );
 };

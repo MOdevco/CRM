@@ -1,319 +1,52 @@
 import { Box, Text } from "@chakra-ui/react";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { API } from "../../api/api";
 import { fan } from "../../assets";
+import WebCard from "../webCard/webCard";
 
-function FanWeb() {
+function FanWeb({preId}) {
+  const [dataItem , setDataItem] = useState([])
+  console.log(preId ) 
+
+  useEffect(() => {
+     axios.get(`${API}api/teachers/get?id=${preId}`, {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      setDataItem(res.data.orgSubSubjects)
+    })
+  } , [API]) 
+
+
+
   return (
     <div>
-      <Box overflow={'auto'}>
-        <Box>
-          <Box display={"flex"}  flexDirection={"column"} >
-            <Text
-              pl={"42px"}
-              pt={"27px"}
-              color={"#1E293B"}
-              fontSize={"24px"}
-              fontWeight={"500"}
-            >
-              Fan va yo’nalish
-            </Text>
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              gap={"145px"}
-              pt={"44px"}
-            >
-              <Box display={"flex"} alignItems={"center"} pl={"29px"} className="borderBottom">
-                <img src={fan} alt="" />
-                <Box flexDirection={"column"} pl={"20px"}>
-                  <Text
-                    color={"#4D515A"}
-                    fontSize={"2xl"}
-                    fontWeight={"500"}
-                    mb={"16px"}
-                    lineHeight={"24px"}
-                  >
-                    Web Frontend
-                  </Text>
-                  <Text
-                    fontSize={"16px"}
-                    fontWeight={"400"}
-                    lineHeight={"24px"}
-                    fontStyle={"normal"}
-                  >
-                    Sales ang marketing are two business....
-                  </Text>
-                </Box>
-              </Box>
-              <Box display={"flex"} flexDirection={"column"}>
-                <Text
-                  color={"#F90"}
-                  fontSize={"16px"}
-                  fontWeight={"500"}
-                  mb={"12px"}
-                >
-                  Dasturlash
-                </Text>
-                <Text color={"#4D515A"} fontSize={"14px"} fontWeight={"400"}>
-                  O’qituvchilar soni: 20
-                </Text>
+      <Box bg={'#fff'} pr={'40px'} width={'700px'} height={'80vh'} overflow={'scroll'}>
+          <Box display={"flex"}   flexDirection={"column"} >
+            <Box position={'sticky'} top={-1} bg={'#fff'} pb={'20px'}>
+              <Text
+                pl={"42px"}
+                pt={"27px"}
+                color={"#1E293B"}
+                fontSize={"24px"}
+                fontWeight={"500"}
+              >
+                Fan va yo’nalish
+              </Text>
+            </Box>
+            <Box >
+              <Box >
+                {dataItem.map((item , i) => (
+                  <WebCard title={item.subSubject.name} desc={item.description} yonalish={item.subject.name} photo={item.imageStore} />
+                ))}
               </Box>
             </Box>
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              gap={"145px"}
-              pt={"44px"}
-            >
-              <Box display={"flex"} alignItems={"center"} pl={"29px"}>
-                <img src={fan} alt="" />
-                <Box flexDirection={"column"} pl={"20px"}>
-                  <Text
-                    color={"#4D515A"}
-                    fontSize={"2xl"}
-                    fontWeight={"500"}
-                    mb={"16px"}
-                    lineHeight={"24px"}
-                  >
-                    Web Frontend
-                  </Text>
-                  <Text
-                    fontSize={"16px"}
-                    fontWeight={"400"}
-                    lineHeight={"24px"}
-                    fontStyle={"normal"}
-                  >
-                    Sales ang marketing are two business....
-                  </Text>
-                </Box>
-              </Box>
-              <Box display={"flex"} flexDirection={"column"}>
-                <Text
-                  color={"#F90"}
-                  fontSize={"16px"}
-                  fontWeight={"500"}
-                  mb={"12px"}
-                >
-                  Dasturlash
-                </Text>
-                <Text color={"#4D515A"} fontSize={"14px"} fontWeight={"400"}>
-                  O’qituvchilar soni: 20
-                </Text>
-              </Box>
-            </Box>
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              gap={"145px"}
-              pt={"44px"}
-            >
-              <Box display={"flex"} alignItems={"center"} pl={"29px"}>
-                <img src={fan} alt="" />
-                <Box flexDirection={"column"} pl={"20px"}>
-                  <Text
-                    color={"#4D515A"}
-                    fontSize={"2xl"}
-                    fontWeight={"500"}
-                    mb={"16px"}
-                    lineHeight={"24px"}
-                  >
-                    Web Frontend
-                  </Text>
-                  <Text
-                    fontSize={"16px"}
-                    fontWeight={"400"}
-                    lineHeight={"24px"}
-                    fontStyle={"normal"}
-                  >
-                    Sales ang marketing are two business....
-                  </Text>
-                </Box>
-              </Box>
-              <Box display={"flex"} flexDirection={"column"}>
-                <Text
-                  color={"#F90"}
-                  fontSize={"16px"}
-                  fontWeight={"500"}
-                  mb={"12px"}
-                >
-                  Dasturlash
-                </Text>
-                <Text color={"#4D515A"} fontSize={"14px"} fontWeight={"400"}>
-                  O’qituvchilar soni: 20
-                </Text>
-              </Box>
-            </Box>
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              gap={"145px"}
-              pt={"44px"}
-            >
-              <Box display={"flex"} alignItems={"center"} pl={"29px"}>
-                <img src={fan} alt="" />
-                <Box flexDirection={"column"} pl={"20px"}>
-                  <Text
-                    color={"#4D515A"}
-                    fontSize={"2xl"}
-                    fontWeight={"500"}
-                    mb={"16px"}
-                    lineHeight={"24px"}
-                  >
-                    Web Frontend
-                  </Text>
-                  <Text
-                    fontSize={"16px"}
-                    fontWeight={"400"}
-                    lineHeight={"24px"}
-                    fontStyle={"normal"}
-                  >
-                    Sales ang marketing are two business....
-                  </Text>
-                </Box>
-              </Box>
-              <Box display={"flex"} flexDirection={"column"}>
-                <Text
-                  color={"#F90"}
-                  fontSize={"16px"}
-                  fontWeight={"500"}
-                  mb={"12px"}
-                >
-                  Dasturlash
-                </Text>
-                <Text color={"#4D515A"} fontSize={"14px"} fontWeight={"400"}>
-                  O’qituvchilar soni: 20
-                </Text>
-              </Box>
-            </Box>
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              gap={"145px"}
-              pt={"44px"}
-            >
-              <Box display={"flex"} alignItems={"center"} pl={"29px"}>
-                <img src={fan} alt="" />
-                <Box flexDirection={"column"} pl={"20px"}>
-                  <Text
-                    color={"#4D515A"}
-                    fontSize={"2xl"}
-                    fontWeight={"500"}
-                    mb={"16px"}
-                    lineHeight={"24px"}
-                  >
-                    Web Frontend
-                  </Text>
-                  <Text
-                    fontSize={"16px"}
-                    fontWeight={"400"}
-                    lineHeight={"24px"}
-                    fontStyle={"normal"}
-                  >
-                    Sales ang marketing are two business....
-                  </Text>
-                </Box>
-              </Box>
-              <Box display={"flex"} flexDirection={"column"}>
-                <Text
-                  color={"#F90"}
-                  fontSize={"16px"}
-                  fontWeight={"500"}
-                  mb={"12px"}
-                >
-                  Dasturlash
-                </Text>
-                <Text color={"#4D515A"} fontSize={"14px"} fontWeight={"400"}>
-                  O’qituvchilar soni: 20
-                </Text>
-              </Box>
-            </Box>
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              gap={"145px"}
-              pt={"44px"}
-            >
-              <Box display={"flex"} alignItems={"center"} pl={"29px"}>
-                <img src={fan} alt="" />
-                <Box flexDirection={"column"} pl={"20px"}>
-                  <Text
-                    color={"#4D515A"}
-                    fontSize={"2xl"}
-                    fontWeight={"500"}
-                    mb={"16px"}
-                    lineHeight={"24px"}
-                  >
-                    Web Frontend
-                  </Text>
-                  <Text
-                    fontSize={"16px"}
-                    fontWeight={"400"}
-                    lineHeight={"24px"}
-                    fontStyle={"normal"}
-                  >
-                    Sales ang marketing are two business....
-                  </Text>
-                </Box>
-              </Box>
-              <Box display={"flex"} flexDirection={"column"}>
-                <Text
-                  color={"#F90"}
-                  fontSize={"16px"}
-                  fontWeight={"500"}
-                  mb={"12px"}
-                >
-                  Dasturlash
-                </Text>
-                <Text color={"#4D515A"} fontSize={"14px"} fontWeight={"400"}>
-                  O’qituvchilar soni: 20
-                </Text>
-              </Box>
-            </Box>
-            {/* <Box
-              display={"flex"}
-              alignItems={"center"}
-              gap={"145px"}
-              pt={"44px"}
-            >
-              <Box display={"flex"} alignItems={"center"} pl={"29px"}>
-                <img src={fan} alt="" />
-                <Box flexDirection={"column"} pl={"20px"}>
-                  <Text
-                    color={"#4D515A"}
-                    fontSize={"2xl"}
-                    fontWeight={"500"}
-                    mb={"16px"}
-                    lineHeight={"24px"}
-                  >
-                    Web Frontend
-                  </Text>
-                  <Text
-                    fontSize={"16px"}
-                    fontWeight={"400"}
-                    lineHeight={"24px"}
-                    fontStyle={"normal"}
-                  >
-                    Sales ang marketing are two business....
-                  </Text>
-                </Box>
-              </Box>
-              <Box display={"flex"} flexDirection={"column"}>
-                <Text
-                  color={"#F90"}
-                  fontSize={"16px"}
-                  fontWeight={"500"}
-                  mb={"12px"}
-                >
-                  Dasturlash
-                </Text>
-                <Text color={"#4D515A"} fontSize={"14px"} fontWeight={"400"}>
-                  O’qituvchilar soni: 20
-                </Text>
-              </Box>
-            </Box> */}
           </Box>
         </Box>
-      </Box>
     </div>
   );
 }

@@ -16,7 +16,7 @@ function UpdateXodim() {
         gap={"15px"}
         pl={{ base: "10", xl: "320px" }}
       >
-      <UpDateXodimLink />
+        <UpDateXodimLink />
 
         <UpDateXodimTitle />
 

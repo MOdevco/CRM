@@ -78,7 +78,7 @@ const AllHodimlar = ({setCount}) => {
                           <Th fontSize={'15px'} color={'gray.500'}>{hodim.physicalFace.primaryPhone}</Th>
                           <Th color={'gray.500'}><HodimImg img={hodim.physicalFace.photo} /></Th>
                           <Th color={'gray.500'}>
-                            <Link to={`/yangiHodim/${hodim.id}`}>
+                            <Link to={`/UpdateXodim/${hodim.id}`}>
                               <CiReceipt  cursor={'pointer'} fontSize={'30px'} color={'#7364FF'} />
                             </Link>
                           </Th>

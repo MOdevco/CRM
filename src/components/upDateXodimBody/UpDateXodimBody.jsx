@@ -7,8 +7,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useMask } from "@react-input/mask";
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { API } from "../../api/api";
 
 function UpDateXodimBody() {
   const [data, setData] = useState([]);
@@ -33,6 +37,40 @@ function UpDateXodimBody() {
     setObj({ ...obj, photo: e.target.files[0] });
   };
 
+
+  const {id} = useParams()
+  const [upDate , setDate] = useState({id: id , address: '' , birthday: '' , e_level: '' , firstname: '' , identification: '' , instagram: '' , lastname: '' , middleName: '' , phone1: '' , phone2: '' , photo: '' ,telegram: ''})
+  useEffect(() => {
+    axios
+      .get(`${API}api/physical-face/single?pId=${id}`, {
+        headers: {
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const interes = res.data.interests
+        const pre = []
+        for(let i = 0; i < interes.length; i++) {
+          pre.push(interes[i].name)
+        }
+        setDate({...upDate, address: res.data.address ,
+          birthday: res.data.birthday , 
+          e_level: res.data.educationLevel.name , 
+          firstname: res.data.firstName , 
+          identification: res.data.personalIdentification, 
+          instagram: res.data.instagramUsername, 
+          lastname: res.data.lastName, 
+          middleName: res.data.middleName, 
+          interests: pre,
+          phone1: res.data.primaryPhone, 
+          phone2: res.data.secondaryPhone , 
+          photo: res.data.photo, 
+          telegram: res.data.telegramUsername})
+      });
+  }, [])
+
   return (
     <Box width={"100%"} p={"30px"} bg={"white"} rounded={"10px"}>
       <Box
@@ -49,7 +87,8 @@ function UpDateXodimBody() {
           >
             <FormControl isRequired>
               <FormLabel>Ismi</FormLabel>
-              <Input
+              <Input value={upDate.firstname}
+
                 onChange={(e) => setObj({ ...obj, firstname: e.target.value })}
                 width={{ base: "100%", xl: "425px", "2xl": "500px" }}
                 placeholder="Ism..."
@@ -58,7 +97,8 @@ function UpDateXodimBody() {
 
             <FormControl isRequired>
               <FormLabel>Familiyasi</FormLabel>
-              <Input
+              <Input value={upDate.lastname}
+
                 onChange={(e) => setObj({ ...obj, lastname: e.target.value })}
                 name="title"
                 width={{ base: "100%", xl: "500px" }}
@@ -76,7 +116,8 @@ function UpDateXodimBody() {
           >
             <FormControl isRequired>
               <FormLabel>Otasining ismi</FormLabel>
-              <Input
+              <Input value={upDate.middleName}
+
                 onChange={(e) => setObj({ ...obj, middleName: e.target.value })}
                 placeholder="Otasini ismi..."
               />
@@ -84,7 +125,8 @@ function UpDateXodimBody() {
 
             <FormControl isRequired>
               <FormLabel>Tug’ilgan sanasi</FormLabel>
-              <Input
+              <Input value={upDate.birthday}
+
                 onChange={(e) => setObj({ ...obj, birthday: e.target.value })}
                 type={"date"}
               />
@@ -101,7 +143,8 @@ function UpDateXodimBody() {
           >
             <FormControl isRequired>
               <FormLabel>Passport Seriyasi</FormLabel>
-              <Input
+              <Input value={upDate.identification}
+
                 onChange={(e) =>
                   setObj({ ...obj, identification: e.target.value })
                 }
@@ -111,7 +154,8 @@ function UpDateXodimBody() {
 
             <FormControl isRequired>
               <FormLabel>Yashash mazili</FormLabel>
-              <Input
+              <Input value={upDate.address}
+
                 onChange={(e) => setObj({ ...obj, address: e.target.value })}
                 placeholder="Manzil..."
               />
@@ -142,7 +186,8 @@ function UpDateXodimBody() {
 
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Asosiy)</FormLabel>
-              <input
+              <input value={upDate.phone1}
+
                 ref={inputRef}
                 onChange={(e) => setObj({ ...obj, phone1: e.target.value })}
                 style={{
@@ -169,7 +214,8 @@ function UpDateXodimBody() {
           >
             <FormControl isRequired>
               <FormLabel>Telefon raqami (Qo’shimcha)</FormLabel>
-              <input
+              <input value={upDate.phone2}
+
                 ref={inputRef2}
                 onChange={(e) => setObj({ ...obj, phone2: e.target.value })}
                 style={{
@@ -188,7 +234,8 @@ function UpDateXodimBody() {
 
             <FormControl isRequired>
               <FormLabel>Telegram (username)</FormLabel>
-              <Input
+              <Input value={upDate.telegram}
+
                 onChange={(e) => setObj({ ...obj, telegram: e.target.value })}
                 placeholder="Telegram..."
               />
@@ -203,7 +250,8 @@ function UpDateXodimBody() {
           >
             <FormControl isRequired>
               <FormLabel>Instagram (username)</FormLabel>
-              <Input
+              <Input value={upDate.instagram}
+
                 onChange={(e) => setObj({ ...obj, instagram: e.target.value })}
                 width={{ base: "100%", xl: "48.5%", "2xl": "50%" }}
                 placeholder="Instagram..."
@@ -236,9 +284,9 @@ function UpDateXodimBody() {
                 accept="image/*"
                 onChange={handleFile}
               />
-              {obj.photo ? (
+              {upDate.photo ? (
                 <img
-                  src={obj.photo[0]}
+                  src={upDate.photo[0]}
                   width={"200px"}
                   height={"200px"}
                   alt={""}
