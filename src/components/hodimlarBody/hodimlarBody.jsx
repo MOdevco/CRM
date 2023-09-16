@@ -48,7 +48,7 @@ const HodimlarBody = ({search}) => {
                     </TabPanel>
                     {id.map((item , i) => (
                         <TabPanel key={i}>
-                            <Direktor id={item.category.id} name={item.category.name}/>
+                            <Direktor search={search} id={item.category.id} name={item.category.name}/>
                         </TabPanel>
                     ))}
                 </TabPanels>

@@ -26,7 +26,7 @@ import axios from "axios";
 import { API } from "../../api/api";
 import HodimImg from "../hodimImg/hodimImg";
 
-const Direktor = ({ id, name,}) => {
+const Direktor = ({ id, name, search}) => {
   const [total, setTotal] = useState(22);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -93,7 +93,9 @@ const Direktor = ({ id, name,}) => {
             </Thead>
             {!loading && (
               <Tbody overflow={"auto"}>
-                {data.map((hodim, i) => (
+                {data.filter((hodim =>{
+                   return search.toLowerCase() == '' ? hodim : hodim.physicalFace.firstName.toLowerCase().includes(search)
+                })).map((hodim, i) => (
                   <Tr key={i} borderBottom={"1px"} borderColor={"#E2E8F0"}>
                     <Th color={"gray.500"}>
                       {hodim.physicalFace.firstName}{" "}
