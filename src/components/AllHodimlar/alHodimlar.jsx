@@ -71,7 +71,7 @@ const AllHodimlar = ({setCount , search}) => {
                 </Thead>
               {!loading && <Tbody overflow={'auto'}>
                   {data.filter((hodim => {
-                    return search.toLowerCase() == '' ? hodim : hodim.physicalFace.firstName.toLowerCase() || hodim.physicalFace.primaryPhone.toLowerCase().includes(search)
+                    return search.toLowerCase() == '' ? hodim : hodim.physicalFace.firstName.toLowerCase().includes(search)
                   }))
                   .map((hodim , i) => (
                       <Tr key={i} borderBottom={'1px'} borderColor={'#E2E8F0'}  >                    
