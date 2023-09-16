@@ -4,15 +4,21 @@ import HodimlarBody from '../components/hodimlarBody/hodimlarBody'
 import HodimlarTitle from '../components/hodimlarTitle/hodimlarTitle'
 import HodimlarTopLink from '../components/hodimlarTopLink/hodimlarTopLink'
 const Hodimlar = () => {
-  const [search , setSearch] = useState('')
+  const [search,setSearch] = useState('')
 
   return (
-    <Box width={'100%'} minHeight={'100vh'} >
-
+    <Box width={"100%"} minHeight={"100vh"}>
+      <Box
+        pt={"100px"}
+        px={"20px"}
+        display={"flex"}
+        flexDirection={"column"}
+        gap={"20px"}
+        pl={{ base: "10", xl: "320px" }}
+      />
         
-        
 
-        <Box pt={'100px'} px={'20px'} display={'flex'} flexDirection={'column'} gap={'20px'} pl={{base: '10' , xl: '320px'}}>
+        <Box pt={'10px'} px={'20px'} display={'flex'} flexDirection={'column'} gap={'20px'} pl={{base: '10' , xl: '320px'}}>
             <HodimlarTopLink />
 
             <HodimlarTitle setSearch={setSearch} />
@@ -24,7 +30,7 @@ const Hodimlar = () => {
 
         
     </Box>
-  )
-}
+  );
+};
 
 export default Hodimlar

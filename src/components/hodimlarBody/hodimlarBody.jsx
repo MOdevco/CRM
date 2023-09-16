@@ -12,22 +12,20 @@ const HodimlarBody = ({search}) => {
    
    const [id , setId] = useState([])
 
-   useEffect(() => {
-    axios.get(`${API}api/physical-stuff/categories` , {
-        headers : {
-            "ngrok-skip-browser-warning": true,
-            "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    }).then((res) => {
-        setData(res.data)
-        setId(res.data)
-    })
-   } , [])
-
-   
-
-  
+  useEffect(() => {
+    axios
+      .get(`${API}api/physical-stuff/categories`, {
+        headers: {
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+        setId(res.data);
+      });
+  }, []);
 
   return (
     <Box    justifyContent={'space-between'}>
@@ -46,7 +44,7 @@ const HodimlarBody = ({search}) => {
                 </TabList>
                 <TabPanels mt={'5px'}>  
                     <TabPanel >
-                        <AllHodimlar search={search}  setCount={setCount} />
+                        <AllHodimlar search={search} setCount={setCount} />
                     </TabPanel>
                     {id.map((item , i) => (
                         <TabPanel key={i}>
@@ -64,7 +62,7 @@ const HodimlarBody = ({search}) => {
 
 
     </Box>
-  )
-}
+  );
+};
 
-export default HodimlarBody
+export default HodimlarBody;

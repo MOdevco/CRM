@@ -1,21 +1,30 @@
-import { AddIcon, SearchIcon } from "@chakra-ui/icons"
-import { Box, Button, FormControl, FormLabel, Heading, Image, Input, useDisclosure  } from "@chakra-ui/react"
+import { AddIcon, SearchIcon } from "@chakra-ui/icons";
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-} from '@chakra-ui/react'
-import { Select } from '@chakra-ui/react'
-import axios from "axios"
-import { useEffect, useRef, useState } from "react"
-import { NavLink } from "react-router-dom"
-import { API } from "../../api/api"
-import { useToast } from '@chakra-ui/react'
-import { dateIcon } from "../../assets"
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Heading,
+  Image,
+  Input,
+  useDisclosure,
+} from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
+import { Select } from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { API } from "../../api/api";
+import { useToast } from "@chakra-ui/react";
+import { dateIcon } from "../../assets";
 
 const HodimlarTitle = ({setSearch}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -27,78 +36,67 @@ const HodimlarTitle = ({setSearch}) => {
     const [dataValue , setDataValue] = useState({cid: '' , fid: '' , start_date: ''})
     const toast = useToast()
 
-    const handleSizeClick = (newSize) => {
-        setSize(newSize)
-        onOpen()
-    }
-
-    useEffect(() => {
-        axios.get(`${API}api/physical-face/all` , {
-            headers: {
-              "ngrok-skip-browser-warning": true,
-              "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-          }).then((res) => {
-            setData(res.data)
-        })
-
-    } ,[])
-
-    useEffect(() => {
-        axios.get(`${API}api/stuff/all` , {
-            headers: {
-              "ngrok-skip-browser-warning": true,
-              "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-          }).then((res) => {
-            setDataItem(res.data)
-        })
-    } ,[])
-
-    const handleSubmit = () => {
-        const formData = new FormData()
-        formData.append("cid" , Number(dataValue.cid))
-        formData.append("fid",  Number(dataValue.fid))
-        formData.append("start_date" , dataValue.start_date)
-        axios.post(`${API}api/physical-stuff/create` , formData , {
-            headers: {
-                "ngrok-skip-browser-warning": true,
-                "Access-Control-Allow-Origin": "*",
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        }).then((res) => {
-            if(res.data.status == true) {
-                onClose()
-                toast({
-                    description: `${res.data.message}`,
-                    position: 'top-right',
-                    status: 'success',
-                    duration: 3000,
-                    isClosable: true,
-                })
-            } 
-            window.location.reload(true);
-        }).catch((err) => {
-            // console.log(err.response.status)
-            // console.log(err.response.data.message)
-            toast({
-                description: `${err.response.data.message}`,
-                position: 'top-right',
-                status: 'error',
-                duration: 3000,
-                isClosable: true,
-            })
-        })
-    }
+  const handleSizeClick = (newSize) => {
+    setSize(newSize);
+    onOpen();
+  };
 
 
-    
+  useEffect(() => {
+    axios
+      .get(`${API}api/stuff/all`, {
+        headers: {
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setDataItem(res.data);
+      });
+  }, []);
 
+  const handleSubmit = () => {
+    const formData = new FormData();
+    formData.append("cid", Number(dataValue.cid));
+    formData.append("fid", Number(dataValue.fid));
+    formData.append("start_date", dataValue.start_date);
+    axios
+      .post(`${API}api/physical-stuff/create`, formData, {
+        headers: {
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.status == true) {
+          onClose();
+          toast({
+            description: `${res.data.message}`,
+            position: "top-right",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+        }
+        window.location.reload(true);
+      })
+      .catch((err) => {
+        // console.log(err.response.status)
+        // console.log(err.response.data.message)
+        toast({
+          description: `${err.response.data.message}`,
+          position: "top-right",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+  };
 
-    
-      const sizes = ['md']
+  const sizes = ["md"];
+
     return (
         <Box >
             
@@ -109,7 +107,7 @@ const HodimlarTitle = ({setSearch}) => {
                     <Box display={'flex'} flexWrap={'wrap'}  alignItems={'center'} gap={'20px'}>
                         <Box display={'flex'} width={{base: '100%' , xl: '372px'}} height={'52px'} alignItems={'center'} gap={'10px'} border={'1px'} borderColor={'#E2E8F0'} p={'10px'} rounded={'10px'} bg={'#fff'}>
                             <SearchIcon color={'#64748B'} />
-                            <input onChange={e => setSearch(e.target.value)} autoFocus type="text" className="inp" placeholder="Hodimlar bo’yicha qidirish..." style={{outline: 'none' , width: '100%'}} />
+                            <input onChange={(e) => setSearch(e.target.value)} autoFocus type="text" className="inp" placeholder="Hodimlar bo’yicha qidirish..." style={{outline: 'none' , width: '100%'}} />
                         </Box>
                         <Box>
                             <NavLink to={'/yangiHodim'}>
@@ -180,11 +178,10 @@ const HodimlarTitle = ({setSearch}) => {
                     
                 </Box>
             </Box>
+           
+       
+          </Box>
+  );
+};
 
-        </Box>
-    )
-}
-
-
-
-export default HodimlarTitle
+export default HodimlarTitle;
