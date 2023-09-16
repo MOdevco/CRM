@@ -1,13 +1,10 @@
-import { Box, Flex } from "@chakra-ui/react";
-import React from "react";
-import HodimlarBody from "../components/hodimlarBody/hodimlarBody";
-import HodimlarTitle from "../components/hodimlarTitle/hodimlarTitle";
-import HodimlarTopLink from "../components/hodimlarTopLink/hodimlarTopLink";
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
-import { API } from "../api/api";
+import { Box, Flex } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import HodimlarBody from '../components/hodimlarBody/hodimlarBody'
+import HodimlarTitle from '../components/hodimlarTitle/hodimlarTitle'
+import HodimlarTopLink from '../components/hodimlarTopLink/hodimlarTopLink'
 const Hodimlar = () => {
+  const [search,setSearch] = useState('')
 
   return (
     <Box width={"100%"} minHeight={"100vh"}>
@@ -18,15 +15,22 @@ const Hodimlar = () => {
         flexDirection={"column"}
         gap={"20px"}
         pl={{ base: "10", xl: "320px" }}
-      >
-        <HodimlarTopLink />
+      />
+        
 
-        <HodimlarTitle />
+        <Box pt={'10px'} px={'20px'} display={'flex'} flexDirection={'column'} gap={'20px'} pl={{base: '10' , xl: '320px'}}>
+            <HodimlarTopLink />
 
-        <HodimlarBody />
-      </Box>
+            <HodimlarTitle setSearch={setSearch} />
+
+            <HodimlarBody search={search} />
+        </Box>
+
+
+
+        
     </Box>
   );
 };
 
-export default Hodimlar;
+export default Hodimlar
