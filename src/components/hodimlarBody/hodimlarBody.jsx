@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API } from '../../api/api'
 import Direktor from '../direktor/direktor'
-const HodimlarBody = () => {
+const HodimlarBody = ({search}) => {
    const [data , setData] = useState([])
    const [count , setCount] = useState([])
-   console.log(count)
+   
    const [id , setId] = useState([])
 
    useEffect(() => {
@@ -46,7 +46,7 @@ const HodimlarBody = () => {
                 </TabList>
                 <TabPanels mt={'5px'}>  
                     <TabPanel >
-                        <AllHodimlar  setCount={setCount} />
+                        <AllHodimlar search={search}  setCount={setCount} />
                     </TabPanel>
                     {id.map((item , i) => (
                         <TabPanel key={i}>

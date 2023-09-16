@@ -16,7 +16,8 @@ import { API } from '../../api/api'
 import HodimImg from '../hodimImg/hodimImg'
 import { Link } from 'react-router-dom'
 
-const AllHodimlar = ({setCount}) => {
+const AllHodimlar = ({setCount , search}) => {
+  console.log(search)
   const [total , setTotal] = useState([])
   const test = hodimlar
   const [data , setData] = useState([])
@@ -69,7 +70,10 @@ const AllHodimlar = ({setCount}) => {
                   </Tr>
                 </Thead>
               {!loading && <Tbody overflow={'auto'}>
-                  {data.map((hodim , i) => (
+                  {data.filter((hodim => {
+                    return search.toLowerCase() == '' ? hodim : hodim.physicalFace.firstName.toLowerCase() || hodim.physicalFace.primaryPhone.toLowerCase().includes(search)
+                  }))
+                  .map((hodim , i) => (
                       <Tr key={i} borderBottom={'1px'} borderColor={'#E2E8F0'}  >                    
                           <Th color={'gray.500'}>{hodim.physicalFace.firstName} {hodim.physicalFace.lastName} {hodim.physicalFace.middleName}</Th>
                           <Th fontSize={'15px'} color={'gray.500'}>{hodim.physicalFace.address}</Th>

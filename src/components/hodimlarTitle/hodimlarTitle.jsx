@@ -17,7 +17,7 @@ import { API } from "../../api/api"
 import { useToast } from '@chakra-ui/react'
 import { dateIcon } from "../../assets"
 
-const HodimlarTitle = () => {
+const HodimlarTitle = ({setSearch}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const initialRef = useRef(null)
     const finalRef = useRef(null)
@@ -109,7 +109,7 @@ const HodimlarTitle = () => {
                     <Box display={'flex'} flexWrap={'wrap'}  alignItems={'center'} gap={'20px'}>
                         <Box display={'flex'} width={{base: '100%' , xl: '372px'}} height={'52px'} alignItems={'center'} gap={'10px'} border={'1px'} borderColor={'#E2E8F0'} p={'10px'} rounded={'10px'} bg={'#fff'}>
                             <SearchIcon color={'#64748B'} />
-                            <input autoFocus type="text" className="inp" placeholder="Hodimlar bo’yicha qidirish..." style={{outline: 'none' , width: '100%'}} />
+                            <input onChange={e => setSearch(e.target.value)} autoFocus type="text" className="inp" placeholder="Hodimlar bo’yicha qidirish..." style={{outline: 'none' , width: '100%'}} />
                         </Box>
                         <Box>
                             <NavLink to={'/yangiHodim'}>
