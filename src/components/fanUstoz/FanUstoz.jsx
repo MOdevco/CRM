@@ -83,12 +83,12 @@ function FanUstoz({ dataItem, setPreId }) {
         <Box cursor={"pointer"}>
           {dataItem.map((item, i) => (
             <UsetozCard
-              name={item.physicalStuff.physicalFace.firstName}
+              name={item.physicalFace.firstName}
               setPreId={setPreId}
               id={item.id}
-              photo={item.physicalStuff.physicalFace.photo}
+              photo={item.physicalFace.photo}
               ph1={"+"}
-              tel={prePh(item.physicalStuff.physicalFace.primaryPhone)}
+              tel={prePh(item.physicalFace.primaryPhone)}
               malumot={"Oliy ma’lumotli"}
             />
           ))}

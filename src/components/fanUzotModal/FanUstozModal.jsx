@@ -21,15 +21,13 @@ import { useEffect, useRef } from "react";
 import { API } from "../../api/api";
 import { useState } from "react";
 import getImage from "../getPhoto/getPhoto";
+import ModalProp from "../modalProp/modalProp";
 
 function FanUstozModal({ id, setPreId }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = useRef(null);
   
-  const [photoData, setPhotoData] = useState("");
-  const all = getImage(id).then((preData) => {
-    setPhotoData(preData);
-  });
+  
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -91,9 +89,7 @@ function FanUstozModal({ id, setPreId }) {
           >
             {data.map((item, i) => (
               <Box>
-                 <Image width={'60px'} height={'60px'} rounded={'10px'} src={`data:image/jpeg;base64,${photoData}`}></Image>
-                <Text fontSize={"22px"}>{item.subSubject.name}</Text>
-                <Text>{item.subject.name}</Text>
+                <ModalProp imageStore={item.imageStore} name={item.subSubject.name} fan={item.subject.name} />
               </Box>
             ))}
           </ModalBody>
