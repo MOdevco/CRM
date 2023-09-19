@@ -3,7 +3,9 @@ import {
   Avatar,
   Box,
   Button,
+  Checkbox,
   IconButton,
+  Image,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -15,31 +17,38 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { API } from "../../api/api";
-import ModalProp from "../modalProp/modalProp";
+import { useState } from "react";
+import getImage from "../getPhoto/getPhoto";
 
-function FanUstozModal() {
+function FanUstozModal({ id, setPreId }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = useRef(null);
-  const [dataModal , setDataModal] = useState([])
-  console.log(dataModal)
+  
+  const [photoData, setPhotoData] = useState("");
+  const all = getImage(id).then((preData) => {
+    setPhotoData(preData);
+  });
 
+  const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get(`${API}api/subjects/sub/all` , {
-      headers: {
-        "ngrok-skip-browser-warning": true,
-        "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    }).then((res) => {
-      setDataModal(res.data)
-    })
-  } , [API])
+    axios
+      .get(`${API}api/org/ss/all-by-org`, {
+        headers: {
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+        // setLoad(false)
+      });
+    console.log(data);
+  }, []);
 
-
+ 
   return (
     <>
       <Box>
@@ -64,11 +73,28 @@ function FanUstozModal() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader pt={'41px'} pl={'76px'}  color={'#1E293B'} fontSize={'24px'} fontWeight={'600'}>Barcha o’qituvchilar</ModalHeader>
+          <ModalHeader
+            pt={"41px"}
+            pl={"76px"}
+            color={"#1E293B"}
+            fontSize={"24px"}
+            fontWeight={"600"}
+          >
+            Barcha o’qituvchilar
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody display={"flex"} flexDirection={"column"} gap={"15px"}>
-            {dataModal.map((item) => (
-              <ModalProp item />
+          <ModalBody
+            display={"flex"}
+            flexDirection={"column"}
+            gap={"15px"}
+            ml={"50px"}
+          >
+            {data.map((item, i) => (
+              <Box>
+                 <Image width={'60px'} height={'60px'} rounded={'10px'} src={`data:image/jpeg;base64,${photoData}`}></Image>
+                <Text fontSize={"22px"}>{item.subSubject.name}</Text>
+                <Text>{item.subject.name}</Text>
+              </Box>
             ))}
           </ModalBody>
           <ModalFooter></ModalFooter>

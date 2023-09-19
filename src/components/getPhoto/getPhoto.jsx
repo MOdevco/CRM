@@ -12,7 +12,6 @@ import { API } from "../../api/api"
     }).then((res) => {
         // console.log(data)
         return res.data
-
     })
     return preData
 
