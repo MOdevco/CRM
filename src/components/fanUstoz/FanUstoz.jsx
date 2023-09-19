@@ -55,12 +55,12 @@ function FanUstoz({dataItem , setPreId}) {
 
         <Box cursor={'pointer'}>
           {dataItem.map((item , i) => (
-            <UsetozCard name={item.physicalStuff.physicalFace.firstName} setPreId={setPreId} id={item.id} photo={item.physicalStuff.physicalFace.photo} ph1={'+'} tel={prePh(item.physicalStuff.physicalFace.primaryPhone)} malumot={'Oliy ma’lumotli'} />
+            <UsetozCard name={item.physicalFace.firstName} setPreId={setPreId} id={item.id} photo={item.physicalFace.photo} ph1={'+'} tel={prePh(item.physicalFace.primaryPhone)} malumot={'Oliy ma’lumotli'} />
           ))}
         </Box>
         
       </Box>
-    </div>
+    </div>   
   );
 }
 

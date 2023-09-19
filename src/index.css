@@ -1,4 +1,6 @@
-
+* {
+  user-select: none !important;
+}
 
 *::-webkit-scrollbar {
   width: 0;

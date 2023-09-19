@@ -7,10 +7,9 @@ import WebCard from "../webCard/webCard";
 
 function FanWeb({preId}) {
   const [dataItem , setDataItem] = useState([])
-  console.log(preId ) 
 
   useEffect(() => {
-     axios.get(`${API}api/teachers/get?id=${preId}`, {
+     axios.get(`${API}api/teachers/get/?id=1`, {
       headers: {
         "ngrok-skip-browser-warning": true,
         "Access-Control-Allow-Origin": "*",

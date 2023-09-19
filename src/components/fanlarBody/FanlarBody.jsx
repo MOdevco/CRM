@@ -11,7 +11,7 @@ function FanlarBody() {
   const [preId , setPreId] = useState()
 
   useEffect(() => {
-    axios.get(`${API}api/teachers/` , {
+    axios.get(`${API}api/physical-stuff/by-category?cid=3` , {
       headers: {
         "ngrok-skip-browser-warning": true,
         "Access-Control-Allow-Origin": "*",
